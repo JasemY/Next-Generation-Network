@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<businessProcessFramwork name="Business Process Framework">
+
+  <levelList>
+
+    <level1 id="1" name="Strategy, Infrastructure, and Product">
+
+    </level1>
+
+    <level1 id="2" name="Operations">
+      <column id="2" name="Operations Support &amp; Readiness"/>
+      <column id="2" name="Fulfillment"/>
+      <column id="2" name="Assurance"/>
+      <column id="2" name="Billing &amp; Revenue Management"/>
+
+      <row id="2" name="Customer Relationship Management"/>
+      <row id="2" name="Service Management &amp; Operations"/>
+      <row id="2" name="Resource Management &amp; Operations (Application, Computing and Network)"/>
+      <row id="2" name="Supplier/partner Relationship Management"/>
+    </level1>
+
+    <level1 id="3" name="Enterprise Management">
+
+    </level1>
+
+  </levelList>
+  
+</businessProcessFramwork>

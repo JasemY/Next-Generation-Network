@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<!-- 
+ONT Troubleshooting Guide
+
+Nokia 7342
+INTELLIGENT SERVICES ACCESS MANAGER FIBER TO THE USER
+ONT R1.2.0
+
+3FE 50939 AAAA TCZZA Edition 01
+
+=============================
+
+Trouble analysis procedures (TAPs)
+
+TAP 100 — Troubleshoot ONT software alarms
+
+Purpose: This TAP provides recommendations for isolating a problem indicated by an alarm report.
+
+General: The alarms appear in response to one of the following TL1 commands:
+
+Procedure:
+
+Use this procedure to isolate problems indicated by alarm reports.
+
+1 From the terminal window for the 7342 ISAM FTTU, enter the TL1 command to retrieve the current standing alarms.
+
+2 From the response output, note the ONT related alarms:
+• AID
+• AID type
+• Alarm severity
+• Alarm condition
+• Service effect
+
+=============================
+
+// below: general alarm formats
+RTRV-HDR:AMS::;
+RTRV-ALM-ALL:AMS::;
+RTRV-ALM-PON:SUR-1-1:ALL:::MN,,NSA;
+RTRV-ALM-PON::ALL:::MN,,NSA;
+
+RTRV-ALM-PON:[tid]:aid_pon:[ctag]::[ntfncde],,[serveff],,;
+
+RTRV-ALM-PON:" + olt + ":ALL:::MJ,,SA;" + "\r\n");
+
+RTRV-ALM-PON:[tid]:aid_pon:[ctag]::[ntfncde],,[serveff],,;
+[ntfncde]
+CR Critical Alarm
+MJ Major Alarm
+MN Minor Alarm
+
+RTRV-ALM-PON:" + olt + ":ALL:::MJ,,SA;" + "\r\n");
+
+-->
+
+<!--
+      Events are logged notifications from either the network or from 5526 AMS itself. Each
+      event can be categorized as one of five autonomous notification types. These types are
+      as follows (the corresponding TL1 command is listed after the event in parentheses,
+      when applicable):
+      • TL1 alarm (REPT ALM)
+      • TL1 event report (REPT EVT)
+      • TL1 environmental alarm (REPT ALM ENV)
+      • TL1 switch report (REPT SW)
+      • 5526 AMS alarm
+      -->
+
+<event>
+
+  <typeList>
+    <type id="" name="TL1 alarm (REPT ALM)" />
+    <type id="" name="TL1 event report (REPT EVT)" />
+    <type id="" name="TL1 environmental alarm (REPT ALM ENV)" />
+    <type id="" name="TL1 switch report (REPT SW)" />
+    <type id="" name="5526 AMS alarm" />
+  </typeList>
+
+  <alarm name="Alarm">
+
+    <aid id="PON" name="PON">
+      <alarmList>
+        <alarm id="PONCOMMFAIL" name="PONCOMMFAIL" severity="Critical" serviceEffect="SA" saveMessage="false">
+          <condition>PON Communication Failure on OLT port</condition>
+          <resolution>Restart the PON</resolution>
+        </alarm>
+        <alarm id="PONLOS" name="PONLOS" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>PON Loss of Signal</condition>
+          <resolution>Check receive PON fiber input at OLT</resolution>
+        </alarm>
+        <alarm id="PONMEA" name="PONMEA" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>PON failed to be provisioned. Mismatch between PON equipment and PON provisioning attributes; index 2 not used</condition>
+          <resolution>Provisioned attributes failed to be provisioned for PON. Delete the PON and reprovision</resolution>
+        </alarm>
+        <alarm id="TXFAIL" name="TXFAIL" severity="Critical" serviceEffect="SA" saveMessage="false">
+          <condition>Transmitter failure on OLT port; index 2 not used</condition>
+          <resolution>Check OLT laser</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONT" name="ONT">
+      <alarmList>
+        <alarm id="BATTFAIL" name="BATTFAIL" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>UPS battery is provisioned and present, but cannot recharge</condition>
+          <resolution>Replace the battery as instructed in the UPS manufacturer's replacement procedures</resolution>
+        </alarm>
+        <alarm id="BATTLOW" name="BATTLOW" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>UPS battery charge is low</condition>
+          <resolution>If the UPS has ac power present, determine why the battery will not charge or why it is low. (See the UPS manufacturer's instructions to diagnose the problem)</resolution>
+        </alarm>
+        <alarm id="BATTMISS" name="BATTMISS" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>UPS battery is provisioned, but is missing</condition>
+          <resolution>Change the ONT provisioning (BTRYBKUP parameter in command ED-ONT) or determine why the battery is missing</resolution>
+        </alarm>
+        <alarm id="DF" name="DF" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Deactivate failure of ONT. Reset the ONT</condition>
+          <resolution>Replace the ONT if the deactivate failure persists</resolution>
+        </alarm>
+        <alarm id="DG" name="DG" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Received Dying Gasp indication from ONT</condition>
+          <resolution>This alarm indicates a loss of power output to the ONT. Restore power to the ONT</resolution>
+        </alarm>
+        <alarm id="DOW" name="DOW" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Drift of window. The OLT received a transmission from the ONT at an unexpected place within the upstream virtual frame</condition>
+          <resolution>Check signal quality of the line from the ONT if the condition persists</resolution>
+        </alarm>
+        <alarm id="ENV1" name="ENV1" severity="NR" serviceEffect="NSA" saveMessage="false">
+          <condition>M-series ONT Alarm-1. This alarm corresponds to a customer installed device</condition>
+          <resolution>The source of the alarm (customer device) is at fault and must be addressed by the customer</resolution>
+        </alarm>
+        <alarm id="ENV2" name="ENV2" severity="NR" serviceEffect="NSA" saveMessage="false">
+          <condition>M-series ONT Alarm-2. This alarm corresponds to a customer installed device</condition>
+          <resolution>The source of the alarm (customer device) is at fault and must be addressed by the customer</resolution>
+        </alarm>
+        <alarm id="ENV3" name="ENV3" severity="NR" serviceEffect="NSA" saveMessage="false">
+          <condition>M-series ONT Alarm-3. This alarm corresponds to a customer installed device</condition>
+          <resolution>The source of the alarm (customer device) is at fault and must be addressed by the customer</resolution>
+        </alarm>
+        <alarm id="EQPT" name="EQPT" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT has failed internal testing</condition>
+          <resolution>Replace the ONT</resolution>
+        </alarm>
+        <alarm id="EQVERMIS" name="EQVERMIS" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Provisioned ONT equipment part number does not match the version reported by the ONT</condition>
+          <resolution>Change the provisioned Version ID to match the reported Version ID. Or, change the physical ONT so that the reported Version ID matches the provisioned Version ID</resolution>
+        </alarm>
+        <alarm id="INACT" name="INACT" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT is inactive (highest priority for any type of ONT alarm)</condition>
+          <resolution>The ONT needs to be ranged (made active)</resolution>
+        </alarm>
+        <alarm id="INTRUDER" name="INTRUDER" severity="Major" serviceEffect="NSA" saveMessage="false">
+          <condition>Unauthorized access to M-series ONT. Door or box is open</condition>
+          <resolution>Check the ONT enclosure for possible illegal access</resolution>
+        </alarm>
+        <alarm id="LCD" name="LCD" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of GEM/ATM Channel Delineation of ONT</condition>
+          <resolution>Check signal quality</resolution>
+        </alarm>
+        <alarm id="LOA" name="LOA" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of Acknowledgement from ONT</condition>
+          <resolution>See if the alarm is isolated to a specific ONT. If not, this is likely a software error</resolution>
+        </alarm>
+        <alarm id="LOAM" name="LOAM" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of PLOAM for ONT</condition>
+          <resolution>Check the receive signal at the ONT; reset the ONT; if LOAM alarm persists, replace the ONT</resolution>
+        </alarm>
+        <alarm id="LOF" name="LOF" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of Frame on ONT</condition>
+          <resolution>Check the receive signal at the ONT</resolution>
+        </alarm>
+        <alarm id="LOKS" name="LOKS" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of key synchronization between OLT and ONT</condition>
+          <resolution>This key is used for the AES encryption algorithm between the OLT and the ONT. Check the connectivity between the OLT and ONT resulting in loss of key exchange PLOAM message between OLT and ONT; reset the ONT; if the LOKS alarm persists, replace the ONT</resolution>
+        </alarm>
+        <alarm id="LOS" name="LOS" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of Signal at ONT (2nd highest priority for any type of ONT alarm)</condition>
+          <resolution>Check the receive signal at the ONT</resolution>
+        </alarm>
+        <alarm id="MEM" name="MEM" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Physical Layer Error Message from an ONT</condition>
+          <resolution>This occurs when the OLT receives an unknown message from an ONU. Determine if this is isolated to a single ONT that is causing the problem and replace that ONT. (This action assumes that the ONT is generating the bad messages.) If the alarm is not isolated to a single ONT, it is most likely a software error</resolution>
+        </alarm>
+        <alarm id="OMCICOMM" name="OMCICOMM" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT fails to respond to OMCI message requests; loss of communications</condition>
+          <resolution>Attempt to restart ONT remotely. Power cycle if remote attempt fails</resolution>
+        </alarm>
+        <alarm id="ONTDISABLED" name="ONTDISABLED" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT has been autonomously disabled because of misbehaving transmissions</condition>
+          <resolution>(This is a defense alarm so that the ONT does not affect the entire PON.) This may be caused by a high signal level. Reset the ONT by administratively putting it OOS and then IS. If the alarm occurs again, then ONT may need to be replaced</resolution>
+        </alarm>
+        <alarm id="ONTMEA" name="ONTMEA" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Mismatch between ONT equipment and ONT provisioning attributes</condition>
+          <resolution>Provisioned attributes failed to be provisioned in the ONT. Delete the ONT and reprovision it</resolution>
+        </alarm>
+        <alarm id="PEE" name="PEE" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Physical Equipment Error on ONT</condition>
+          <resolution>Check the fiber, replace the ONT, or replace the GLT card at OLT</resolution>
+        </alarm>
+        <alarm id="PWR" name="PWR" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>Loss of external power to ONT; on battery backup</condition>
+          <resolution>Wait for power to return to the ONT</resolution>
+        </alarm>
+        <alarm id="RDI" name="RDI" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Remote Defect Indication from ONT</condition>
+          <resolution>The OLT transmission was received with errors at the ONT. Check the receive signal at the ONT</resolution>
+        </alarm>
+        <alarm id="SD" name="SD" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Signal degraded for ONT (BER threshold exceeded)</condition>
+          <resolution>Check the signal quality of the line from the ONT</resolution>
+        </alarm>
+        <alarm id="SF" name="SF" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Signal Fail from ONT (BER threshold exceeded)</condition>
+          <resolution>Check the signal quality of the line from the ONT</resolution>
+        </alarm>
+        <alarm id="SUF" name="SUF" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Startup Failure in Ranging of ONT</condition>
+          <resolution>Check line quality; re-range the ONT</resolution>
+        </alarm>
+        <alarm id="SWACTFAIL" name="SWACTFAIL" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>ONT failed to activate the passive image designated by the OLT; the ONT failed to reboot following a software activation</condition>
+          <resolution>To clear this alarm without forcing a reboot, change the Planned Software Version to reflect the currently active version; manually clear the alarm (e.g., changed Planned version); call Nokia customer technical assistance. For more information, refer to 7342 ISAM FTTU P-OLT Software Installation Procedures</resolution>
+        </alarm>
+        <alarm id="SWDLFAIL" name="SWDLFAIL" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>Download of software to ONT has failed</condition>
+          <resolution>Ensure that the planned ONT software version is physically present on the OLT; retry the download; manually clear the alarm (e.g., changed Planned version); call Nokia customer technical assistance. For more information, refer to 7342 ISAM FTTU P-OLT Software Installation Procedures</resolution>
+        </alarm>
+        <alarm id="SWDLIP" name="SWDLIP" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>Software download is pending or in progress from the OLT to the ONT</condition>
+          <resolution>No action is required. This alarm is raised when download is initiated; this alarm clears when there is no pending file-transfer activity or when the download has completed, successfully or not</resolution>
+        </alarm>
+        <alarm id="SWVER" name="SWVER" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>Software version mismatch between the Planned Software Version and the Active Software Version</condition>
+          <resolution>The alarm is raised when the software activation fails and the equipment rolls back to the previously active software version. Make the active version equal the planned version via successful activation or make the planned version equal the active version. Refer to 7342 ISAM FTTU P-OLT Software Installation Procedures</resolution>
+        </alarm>
+        <alarm id="WRONGPW" name="WRONGPW" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT failed to return expected password; ONT mischief (security issue)</condition>
+          <resolution>Deactivate the ONT; call the customer</resolution>
+        </alarm>
+        <alarm id="NEWONT" name="NEWONT" severity="Minor" serviceEffect="NSA" saveMessage="true">
+          <condition>An unprovisioned ONT has been discovered on the PON</condition>
+          <resolution>This is an operator warning; no repair is necessary. If the ONT is provisioned, autonomous ONT activation should begin, or further provisioning may be needed</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTPOTS" name="ONTPOTS">
+      <alarmList>
+        <alarm id="POTSSVCMIS" name="POTSSVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>ONT POTS services mismatch</condition>
+          <resolution>The ONT did not accept the OMCI configuration requests for the provisioned POTS service. One possible reason is that the POTS service is not physically supported by the ONT. (For example, POTS is provisioned for a port that does not support POTS.) Verify the POTS service capability of the ONT. Restart the ONT to see if the problem persists, or deprovision the unsupported POTS service port</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTCARD" name="ONTCARD">
+      <alarmList>
+        <alarm id="LIMMISSING" name="LIMMISSING" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Provisioned ONT card missing (nonintegrated)</condition>
+          <resolution>Install the missing ONT card or deprovision the ONT card and services if no longer supported</resolution>
+        </alarm>
+        <alarm id="LIMMEA" name="LIMMEA" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Plug-in ONT card is wrong type (nonintegrated and integrated)</condition>
+          <resolution>Install the correct type ONT card</resolution>
+        </alarm>
+        <alarm id="LIMIMPROPRMVL" name="LIMIMPROPRMVL" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT card removed without being deprovisioned (nonintegrated)</condition>
+          <resolution>Install the missing ONT card or deprovision the ONT card and services if no longer supported</resolution>
+        </alarm>
+        <alarm id="LIMFAIL" name="LIMFAIL" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT card failure detected or failed self-test (nonintegrated)</condition>
+          <resolution>Replace the failed ONT card</resolution>
+        </alarm>
+        <alarm id="LIMSVCMIS" name="LIMSVCMIS" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>ONT did not accept the OMCI configuration requests for the provisioned ONU card</condition>
+          <resolution>Restart the ONT to see if the problem persists or delete the unsupported card</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTVOIP" name="ONTVOIP">
+      <alarmList>
+        <alarm id="VOIPCNFG" name="VOIPCNFG" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>Voice configuration file error</condition>
+          <resolution>The voice provisioning file failed to be downloaded to the ONT Check the connection to the FTP server; check the format of the file; check (verify) the specified file name</resolution>
+        </alarm>
+        <alarm id="VCLIENTSVCMIS" name="VCLIENTSVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Either the LT or ONT did not accept the configuration requests for the provisioned Voice Client service</condition>
+          <resolution>Either the service is not supported by the ONT or there is an LT configuration or setup problem. Possible solutions are to restart the ONT, to restart the LT, or to deprovision the Voice Client service since it is not supported</resolution>
+        </alarm>
+        <alarm id="VGATEWAYCOMM" name="VGATEWAYCOMM" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>The voice gateway is unreachable for this Voice Client</condition>
+          <resolution>1) Check network connectivity and configuration. 2) Verify that G6 provisioning includes the following settings: • CPE PT = 97 • bcastrestricted = enable 3) Ensure that the value of the AGEING parameter in the RTRV-PONVLANSYS and SET-PONVLANSYS is larger than the value of the Inactivity Timer in the G6 "show services h248 bbi" setting</resolution>
+        </alarm>
+        <alarm id="VDHCPERR" name="VDHCPERR" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>The voice DHCP server is unreachable by the Voice Client or the Voice Client failed to obtain required IP addresses from the server</condition>
+          <resolution>Check network connectivity and configuration</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTENET" name="ONTENET">
+      <alarmList>
+        <alarm id="LANLOS" name="LANLOS" severity="NR" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of signal on an Ethernet port interface (i.e., no carrier)</condition>
+          <resolution>This is actually the OMCI LAN-LOS alarm on the PPTP Ethernet UNI Managed Entity. It is directly related to the LAN Link LED on the ONT. Determine why there is no Ethernet signal on an Ethernet port</resolution>
+        </alarm>
+        <alarm id="LANSVCMIS" name="LANSVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>A condition meaning that there is a LAN services mismatch and the ONT did not accept the OMCI configuration requests for the LAN service</condition>
+          <resolution>The provisioned LAN service was rejected by the ONT during OMCI configuration requests. Verify the LAN service capability of the ONT. Restart the ONT to see if the problem persists or delete the unsupported LAN service port</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTHSI" name="ONTHSI">
+      <alarmList>
+        <alarm id="HSISVCMIS" name="HSISVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Either the LT or the ONT did not accept the configuration requests for the provisioned High Speed Internet (HSI) service</condition>
+          <resolution>Either the service is not supported by the ONT or there is an LT configuration or setup problem. Possible solutions are to restart the ONT, to restart the LT, or to deprovision the Voice Client service since it is not supported</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="BRGPORT" name="BRGPORT">
+      <alarmList>
+        <alarm id="DUPADDR" name="DUPADDR" severity="Minor" serviceEffect="NSA" saveMessage="false">
+          <condition>Duplicate mac address detected on a bridge port</condition>
+          <resolution>Check equipment in network for duplicate mac addresses on HSI or VoIP services</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTVDSL" name="ONTVDSL">
+      <alarmList>
+        <alarm id="LOF" name="LOF" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Near End Loss of Frame (VTU-O)</condition>
+          <resolution>Check the M-series ONT VDSL receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOL" name="LOL" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Near End Loss of Link (VTU-O)</condition>
+          <resolution>Check the M-series ONT VDSL receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOP" name="LOP" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Near End Loss of Power (VTU-O)</condition>
+          <resolution>Check the M-series ONT VDSL receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOS" name="LOS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Near End Loss of Signal (VTU-O)</condition>
+          <resolution>Check the M-series ONT VDSL receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOSQ" name="LOSQ" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Near End Loss of Signal Quality (VTU-O); noise margin has fallen below the minimum noise margin</condition>
+          <resolution>Check the M-series ONT VDSL receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOF" name="LOF" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Far End Loss of Frame (VTU-R)</condition>
+          <resolution>Check the CPE receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOP" name="LOP" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Far End Loss of Power (VTU-R)</condition>
+          <resolution>Check the CPE receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOS" name="LOS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Far End Loss of Signal (VTU-R)</condition>
+          <resolution>Check the CPE receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="LOSQ" name="LOSQ" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Far End Loss of Signal Quality (VTU-R); noise margin has fallen below the minimum noise margin</condition>
+          <resolution>Check the CPE receive signal and the CPE equipment for problems</resolution>
+        </alarm>
+        <alarm id="VDSLSVCMIS" name="VDSLSVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>A condition meaning that there is a VDSL services mismatch and the ONT did not accept the OMCI configuration requests for the provisioned VDSL service</condition>
+          <resolution>One possible reason is that the VDSL service is not physically supported by the ONT. (For example, the VDSL port could be provisioned on a slot that has a POTS-only card equipped.) Verify the VDSL service capability of the ONT, then restart the ONT to see if problem persists. Or, delete the unsupported VDSL service port</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <aid id="ONTVIDOL" name="ONTVIDOL">
+      <alarmList>
+        <alarm id="VIDEOANISVCMIS" name="VIDEOANISVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>This is an ONT services mismatch for VIDEO ANI, a condition meaning that the ONT did not accept the OMCI configuration requests for the Video ANI service</condition>
+          <resolution>The provisioned VIDEO ANI service was rejected by the ONT during OMCI configuration requests. Verify the RF Video Overlay service capability of the ONT. Restart the ONT to see if the problem persists, or delete the unsupported video port</resolution>
+        </alarm>
+        <alarm id="VIDEOUNISVCMIS" name="VIDEOUNISVCMIS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>A condition meaning that the ONT did not accept the OMCI configuration requests for the Video service (for video overlay)</condition>
+          <resolution>The provisioned VIDEO service was rejected by the ONT during OMCI configuration requests. Verify the RF Video Overlay service capability of the ONT. Restart the ONT to see if the problem persists, or delete the unsupported video port (service is for video overlay)</resolution>
+        </alarm>
+        <alarm id="VIDEOLOS" name="VIDEOLOS" severity="Minor" serviceEffect="SA" saveMessage="false">
+          <condition>Loss of Signal on the RF video overlay port interface</condition>
+          <resolution>This is actually the OMCI Video Loss of Signal alarm on the PPTP Video ANI Managed Entity. Determine why the ONT has lost RF video input signal. Check the video signal</resolution>
+        </alarm>
+        <alarm id="LEVELHIGH" name="LEVELHIGH" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>The video optical signal level is too high</condition>
+          <resolution>Check the RF video signal and decrease the signal level</resolution>
+        </alarm>
+        <alarm id="LEVELLOW" name="LEVELLOW" severity="Major" serviceEffect="SA" saveMessage="false">
+          <condition>The video optical signal level is too low</condition>
+          <resolution>Check the RF video signal and increase the signal level</resolution>
+        </alarm>
+      </alarmList>
+    </aid>
+
+    <severityList>
+      <!--
+      Critical
+      Major
+      Minor
+      Normal (no “reported” alarms)
+      Not yet determined
+      Warning
+      -->
+      <severity id="" name="CR" description="Critical"/>
+      <severity id="" name="MJ" description="Major"/>
+      <severity id="" name="MN" description="Minor"/>
+      <severity id="" name="NR?" description="Normal/not reported"/>
+      <severity id="" name="NA" description="Not alarmed"/>
+      <severity id="" name="ND?" description="Not yet determained"/>
+      <severity id="" name="WA?" description="Warning"/>
+      <severity id="" name="CL" description="Clear"/>
+    </severityList>
+
+    <serviceEffectList>
+      <!--
+       Note — Service effect is designated as Service Affecting (SA), Not
+       Service Affecting (NSA), or Not Reported (NR).
+      -->
+      <serviceEffect id="" name="SA" description="Service Affecting"/>
+      <serviceEffect id="" name="NSA" description="Not Service Affecting"/>
+      <serviceEffect id="" name="NR" description="Not Reported"/>
+    </serviceEffectList>
+
+  </alarm>
+
+</event>

@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+Application,إدارة شبكة الألياف الضوئية,مراقبة تقنية المعلومات,مراقبة الدعم الفنى للشبكة,مراقبة تشغيل الشبكة,مراقبة خدمات الشبكة,قسم الخطوط الطرفية,قسم الدعم الفني للشبكة,قسم تشغيل الخدمات,قسم تشغيل المقاسم,قسم تقنية المعلومات,قسم خدمات الشبكة,قسم خطوط النقل,قسم دعم تشغيل الشبكة,قسم عمليات الشبكة
+
+- Make sure category, resolution, and area ids are all distinct throughout file
+- Don't remove items that are obsolete, just mark them with obsolete="true"
+- canInsert is true if not explicitly specified
+
+-->
+
+<report>
+
+  <category id="1" name="Client Service Issues" arabicName="">
+
+    <area id="11" name="Service" arabicName="" framework="Application,إدارة شبكة الألياف الضوئية,مراقبة تقنية المعلومات,مراقبة الدعم الفنى للشبكة,مراقبة تشغيل الشبكة,مراقبة خدمات الشبكة,قسم الخطوط الطرفية,قسم الدعم الفني للشبكة,قسم تشغيل الخدمات,قسم تشغيل المقاسم,قسم تقنية المعلومات,قسم خدمات الشبكة,قسم خطوط النقل,قسم دعم تشغيل الشبكة,قسم عمليات الشبكة,نوكيا">
+
+      <indicationList framework="Application,إدارة شبكة الألياف الضوئية,مراقبة تقنية المعلومات,مراقبة الدعم الفنى للشبكة,مراقبة تشغيل الشبكة,مراقبة خدمات الشبكة,قسم الخطوط الطرفية,قسم الدعم الفني للشبكة,قسم تشغيل الخدمات,قسم تشغيل المقاسم,قسم تقنية المعلومات,قسم خدمات الشبكة,قسم خطوط النقل,قسم دعم تشغيل الشبكة,قسم عمليات الشبكة,نوكيا">
+
+        <indication id="1101" name="No IP" arabicName=""/>
+        <indication id="1102" name="Fast Busy" arabicName=""/>
+        <indication id="1103" name="Board Fault" arabicName=""/>
+        <indication id="1104" name="No ONT Electricity" arabicName=""/>
+        <indication id="1105" name="ONT Locked" arabicName=""/>
+        <indication id="1106" name="Faulty Wiring" arabicName=""/>
+        <indication id="1107" name="No ONT" arabicName=""/>
+        <indication id="1126" name="New ONT" arabicName="" obsolete="true"/>
+        <indication id="1127" name="No Dial Tone" arabicName=""/>
+        <indication id="1108" name="ONT Fault" arabicName=""/>
+        <indication id="1109" name="Send No Receive" arabicName=""/>
+        <indication id="1110" name="Receive No Send" arabicName=""/>
+        <indication id="1111" name="Service Group" arabicName=""/>
+        <indication id="1112" name="Cut Fiber" arabicName=""/>
+        <indication id="1113" name="TD Not Functional" arabicName=""/>
+        <indication id="1114" name="Address Wrong" arabicName=""/>
+        <indication id="1115" name="Serial Wrong" arabicName=""/>
+        <indication id="1116" name="Voice Gateway Alarm" arabicName=""/>
+        <indication id="1117" name="Echo" arabicName=""/>
+        <indication id="1118" name="ONT Off" arabicName=""/>
+        <indication id="1119" name="Software Error" arabicName=""/>
+        <indication id="1120" name="No Work Order" arabicName="" obsolete="true"/>
+        <indication id="1121" name="No Information" arabicName=""/>
+        <indication id="1122" name="Incomplete Work Order" arabicName=""/>
+        <indication id="1123" name="ONT Not Visible in AMS" arabicName="" obsolete="true"/>
+        <indication id="1124" name="No Answer" arabicName="" obsolete="true"/>
+        <indication id="1125" name="Mobile Off" arabicName="" obsolete="true"/>
+
+      </indicationList>
+
+      <actionList framework="Application,قسم الخطوط الطرفية,قسم الدعم الفني للشبكة,قسم تشغيل الخدمات,قسم تشغيل المقاسم,قسم تقنية المعلومات,قسم خدمات الشبكة,قسم خطوط النقل,قسم دعم تشغيل الشبكة,قسم عمليات الشبكة,نوكيا">
+
+        <action id="1101" name="Reset ONT" arabicName=""/>
+        <action id="1102" name="Download Software" arabicName=""/>
+        <action id="1103" name="Reset LAN" arabicName=""/>
+        <action id="1104" name="Reset LT" arabicName=""/>
+        <action id="1105" name="Reset TD" arabicName=""/>
+        <action id="1106" name="Change TD" arabicName=""/>
+        <action id="1110" name="Create TD" arabicName=""/>
+        <action id="1107" name="Change Board" arabicName=""/>
+
+      </actionList>
+
+    </area>
+
+    <area id="12" name="Technician" framework="Application,إدارة شبكة الألياف الضوئية,مراقبة تقنية المعلومات,مراقبة الدعم الفنى للشبكة,مراقبة تشغيل الشبكة,مراقبة خدمات الشبكة,قسم الخطوط الطرفية,قسم الدعم الفني للشبكة,قسم تشغيل الخدمات,قسم تشغيل المقاسم,قسم تقنية المعلومات,قسم خدمات الشبكة,قسم خطوط النقل,قسم دعم تشغيل الشبكة,قسم عمليات الشبكة,نوكيا">
+
+      <indicationList framework="Application">
+
+        <indication id="1201" name="Address Wrong" arabicName=""/>
+        <indication id="1202" name="ONT Number Wrong" arabicName=""/>
+        <indication id="1203" name="No One in Premises" arabicName=""/>
+        <indication id="1204" name="No Answer" arabicName=""/>
+        <indication id="1205" name="TD Faulty" arabicName=""/>
+        <indication id="1206" name="No Power" arabicName=""/>
+
+      </indicationList>
+
+      <actionList framework="Application,إدارة شبكة الألياف الضوئية,مراقبة تقنية المعلومات,مراقبة الدعم الفنى للشبكة,مراقبة تشغيل الشبكة,مراقبة خدمات الشبكة,قسم الخطوط الطرفية,قسم الدعم الفني للشبكة,قسم تشغيل الخدمات,قسم تشغيل المقاسم,قسم تقنية المعلومات,قسم خدمات الشبكة,قسم خطوط النقل,قسم دعم تشغيل الشبكة,قسم عمليات الشبكة,نوكيا">
+
+        <action id="1201" name="Check ONT" arabicName=""/>
+        <action id="1202" name="Replace ONT" arabicName=""/>
+        <action id="1203" name="Replace Adapter" arabicName=""/>
+        <action id="1204" name="Check Fiber" arabicName=""/>
+        <action id="1209" name="Check Power" arabicName=""/>
+
+      </actionList>
+
+      <actionList framework="Application">
+
+        <action id="1205" name="Need to Change ONT" arabicName=""/>
+        <action id="1206" name="ONT Replaced" arabicName=""/>
+        <action id="1207" name="Adapter Replaced" arabicName=""/>
+        <action id="1208" name="Fiber Cut" arabicName=""/>
+
+      </actionList>
+
+    </area>
+
+  </category>
+
+
+  <category id="2" name="Internal Service Issues">
+
+    <area id="21" name="Internal" >
+      <indicationList framework="">
+        <indication id="2100" name="Internal 1" arabicName=""/>
+        <indication id="2101" name="Internal 2" arabicName=""/>
+      </indicationList>
+    </area>
+
+  </category>
+
+
+  <category id="3" name="Supplier Service Issues" arabicName="">
+
+    <!-- below: resolution id numbers above 1300 -->
+
+    <area id="32" name="Nokia" arabicName="نوكيا" framework="نوكيا">
+
+      <indicationList framework="نوكيا">
+
+        <indication id="3202" name="ONT Not Installed" arabicName=""/>
+        <indication id="3203" name="ONT Not Provisioned" arabicName=""/>
+        <indication id="3204" name="Did not Submit Data" arabicName=""/>
+        <indication id="3205" name="No One in Premises" arabicName=""/>
+        <indication id="3206" name="No Answer" arabicName=""/>
+        <indication id="3207" name="ONT Number Wrong" arabicName=""/>
+        <indication id="3208" name="Fiber Cut" arabicName=""/>
+        <indication id="3209" name="No Power" arabicName=""/>
+
+        <indication id="3210" name="Lead-In Pipe Block" arabicName=""/>
+        <indication id="3211" name="Internal Pipe Block" arabicName=""/>
+        <indication id="3212" name="No Power Socket" arabicName=""/>
+        <indication id="3213" name="DB Outside" arabicName=""/>
+        <indication id="3214" name="Cable Damaged" arabicName=""/>
+        <indication id="3215" name="Splicing" arabicName=""/>
+
+      </indicationList>
+
+      <actionList framework="نوكيا">
+
+        <action id="3202" name="ONT Installed" arabicName=""/>
+        <action id="3203" name="ONT Provisioned" arabicName=""/>
+        <action id="3204" name="Data Submitted" arabicName=""/>
+        <action id="3205" name="ONT Replaced" arabicName=""/>
+        <action id="3206" name="Adapter Replaced" arabicName=""/>
+        <action id="3207" name="Power On" arabicName=""/>
+        <action id="3208" name="Re-Splicing" arabicName=""/>
+        <action id="3209" name="ONT Reset" arabicName=""/>
+
+      </actionList>
+
+    </area>
+
+    <area id="33" name="Tcil" arabicName="" framework="">
+
+      <indicationList framework="">
+
+        <indication id="3303" name="Tcil" arabicName="تسيل"/>
+
+      </indicationList>
+
+      <actionList framework="">
+
+        <action id="3303" name="Something" arabicName=""/>
+
+      </actionList>
+
+    </area>
+
+    <area id="34" name="Knetco" arabicName="" framework="">
+
+      <indicationList framework="">
+
+        <indication id="3404" name="Knetco" arabicName="كنتكو"/>
+
+      </indicationList>
+
+      <actionList framework="">
+
+        <action id="3404" name="Something" arabicName=""/>
+
+      </actionList>
+
+    </area>
+
+    <area id="35" name="Huawei" arabicName="" framework="">
+    </area>
+
+    <area id="36" name="Siemens" arabicName="" framework="">
+    </area>
+
+  </category>
+
+  <!--
+,resolved duplicate
+,resolved implemented
+,resolved won't implement
+,resolved already exists
+,resolved won't respond
+  -->
+
+  <severity id="1" name="Critical" arabicName="حرج"/>
+  <severity id="2" name="High" arabicName="مرتفع"/>
+  <severity id="3" name="Medium" arabicName="وسط"/>
+  <severity id="4" name="Low" arabicName="منخفض"/>
+  <severity id="0" name="Unspecified" arabicName="غير محدد"/>
+
+  <priority id="1" name="Fix now" arabicName="أصلح الآن"/>
+  <priority id="2" name="Very important" arabicName="مهم جداً"/>
+  <priority id="3" name="Important" arabicName="مهم"/>
+  <priority id="4" name="Not so important" arabicName="غير مهم"/>
+  <priority id="5" name="Worth remembering" arabicName="يتذكر"/>
+  <priority id="6" name="Do not fix" arabicName="لا تصلح"/>
+  <priority id="0" name="Unspecified" arabicName="غير محدد"/>
+
+  <!--
+   Severity Levels
+   1 ?10 Success
+   2 ?20 Information
+   3 ?30 Warning
+   4 ?40 Error
+   5 ?50 Critical Error
+   6 ?60 Security Issue
+   7 ?70 Service Unavailable
+  -->
+
+  <status id="1" name="Open" arabicName="مفتوح" color="Green"/>
+  <status id="2" name="Closed" arabicName="مغلق" color="Red"/>
+  <!-- status id="0" name="Unspecified" arabicName="غير محدد"/ -->
+
+  <estimate id="1" name="Hour" arabicName="ساعة"/>
+  <estimate id="2" name="Few hours" arabicName="بضع ساعات"/>
+  <estimate id="3" name="Day's end" arabicName="نهاية اليوم"/>
+  <estimate id="4" name="Tomorrow" arabicName="غداً"/>
+  <estimate id="5" name="This week" arabicName="خلال أسبوع"/>
+  <estimate id="6" name="Few weeks" arabicName="بضع أسابيع"/>
+  <estimate id="7" name="Don't know" arabicName="لا اعلم"/>
+  <estimate id="0" name="Unspecified" arabicName="غير محدد"/>
+
+  <indication id="1001" name="Other (Specify)" arabicName="شيء ءاخر"/>
+  <indication id="1000" name="Unspecified" arabicName="غير محدد"/>
+
+  <action id="1001" name="No Action" arabicName=""/>
+  <action id="1002" name="Other (Specify)" arabicName="شيء ءاخر"/>
+  <action id="1000" name="Unspecified" arabicName="غير محدد"/>
+
+  <resolution id="1001" name="Acknowledged" arabicName="عُلم"/>
+  <resolution id="1002" name="Assign" arabicName="تعيين" canInsert="false"/>
+  <resolution id="1003" name="Assigned" arabicName="تم تعيين" canInsert="false"/>
+  <resolution id="1004" name="Accepted" arabicName="قُبِل التعيين" canInsert="false"/>
+  <resolution id="1005" name="Not Accepted" arabicName="رفض التعيين"/>
+
+  <resolution id="1006" name="Not Yet Deployed" arabicName="لم يشغل"/>
+  <resolution id="1007" name="No Problem" arabicName="لا مشكلة"/>
+  <resolution id="1008" name="Not Reproducible" arabicName="غير محدد"/>
+  <resolution id="1009" name="No Plan to Fix" arabicName="لن يتم تصليح"/>
+  <resolution id="1010" name="Don't Know" arabicName="لا اعلم"/>
+  <resolution id="1011" name="Postponed" arabicName="تأجل"/>
+  <resolution id="1012" name="By Design" arabicName="كذا بالتصميم"/>
+  <resolution id="1013" name="Waiting for Info" arabicName="بانتظار معلومات"/>
+  <resolution id="1014" name="Not Responsible" arabicName="لستُ مسؤولاً"/>
+  <resolution id="1015" name="Waiting for Reply" arabicName="بانتظار رد"/>
+  <resolution id="1016" name="Domain Assignment" arabicName="تعيين نطاق" canInsert="false"/>
+  <resolution id="1017" name="Waiting for Colleague" arabicName="بانتظار رد زميل"/>
+  <resolution id="1021" name="Not Cooperative" arabicName="غير متعاون"/>
+  <resolution id="1018" name="Not Resolved" arabicName="لم تحل"/>
+
+  <resolution id="1022" name="Reopened" arabicName="إعادة فتح" canInsert="false"/>
+
+  <resolution id="1020" name="Resolved" arabicName="تم الحل" color="Green"/>
+  <resolution id="1019" name="Other (Specify)" arabicName="شيء ءاخر"/>
+  <resolution id="1000" name="Unspecified" arabicName="غير محدد"/>
+
+  <customerCare>
+
+    <indication>
+      <response text="No premises information (لا توجد معلومات للبيت)">
+        <selection text="No ONT information in system/network (لا توجد معلومات للصندوق في النظام)"/>
+        <selection text="No ONT information in Customer Dept database (لا توجد معلومات للصندوق عند الخدمات)"/>
+      </response>
+
+      <response text="Number is within system (الرقم موجود في النظام)">
+        <inquery text="Address (العنوان)">
+          <selection text="Address is wrong (العنوان خطأ)"/>
+        </inquery>
+      </response>
+
+      <inquery text="Billing Disconnect (قطع المحاسبة)">
+        <selection text="Account settled but service is still disconnected (تم تسديد المبلغ ولم يعمل الخط)"/>
+      </inquery>
+
+      <response text="No dial tone; or Unstable somtimes working and not (لا يعمل أو متقطع أو مشغول)">
+        <inquery text="Did the phone ever worked, or only recently stopped (هل كان يعمل من قبل)">
+          <selection text="Never worked before (لم يعمل منذ التركيب)"/>
+          <selection text="Worked before (كان يعمل)"/>
+          <selection text="Re-occuring fault (عطل متكرر)"/>
+        </inquery>
+        <selection text="Disconnected (مقطوع)"/>
+        <selection text="Intermittent (متقطع)"/>
+        <selection text="Off-Hook (مشغول)"/>
+        <selection text="Echo (صدى)"/>
+        <selection text="Interruption (تشويش)"/>
+        <selection text="Interference (تشابك)"/>
+
+        <selection text="ONT Changed (تغيير جهاز)"/>
+
+        <response text="Check if the power is connected to the ONT (تأكد من وصول الكهرباء)"/>
+        <response text="Remove all PBX devices, connect a regular phone set and check for a dial tone (افصل البدالة وضع هاتفاً عادياً)"/>
+        <response text="Turn the power on/off (reset) the ONT (افصل ثم شغل الكهرباء)"/>
+        <response text="Open the outer box of ONT and look at the Status Indicators LEDs (افتح الصندوق الخارجي للجهاز وعاين الإشارات الضوئية)">
+          <inquery text="FAIL and BTRY and PWR are OFF">
+            <inquery text="Using a digital volt meter, check the dc voltage supply to the ONT."/>
+            <inquery text="If +12 V dc is being supplied, replace ONT"/>
+          </inquery>
+          <selection text="FAIL is RED: Equipment failure or not ranged, synchronized (FAIL أحمر)"/>
+          <selection text="BTRY is OFF: Battery alarm set or battery not provisioned (BTRY مطفئ)"/>
+          <selection text="MGMT is OFF: No communication between OLT/ONT (MGMT مطفئ)"/>
+        </response>
+      </response>
+
+      <inquery text="Send &amp; Receive (إرسال واستقبال)">
+        <selection text="Send but not receive (يرسل ولا يستقبل)"/>
+        <selection text="Receive but not send (يستقبل ولا يرسل)"/>
+      </inquery>
+
+      <inquery text="Service Transfer (نقل الخدمة)">
+        <selection text="Service transfered but did not work (تم نقل الخدمة لكن لم يعمل)"/>
+      </inquery>
+
+      <inquery text="Caller ID (كاشف الرقم)">
+        <response text="Check if phone batteries have power"/>
+        <response text="PBX: Check if you have caller-id card installed"/>
+        <selection text="Caller ID does not work (كاشف الرقم لا يعمل)"/>
+      </inquery>
+
+      <inquery text="Call Waiting (الانتظار)">
+        <response text="Check that service is installed (تأكد من تركيب الخدمة)">
+          <response text="How to use Call Waiting (طريقة استعمال خدمة الانتظار)">
+            <link text="See: Service User Guide (طريقة تشغيل الخدمات: دليل المستخدم)" url="../../document/service-activation-and-management-user-guide.aspx"/>
+          </response>
+        </response>
+        <selection text="Call waiting does not work (الانتظار لا يعمل)"/>
+      </inquery>
+
+      <inquery text="Group Service (مجموعة الخدمات)">
+        <response text="Check that service is installed (تأكد من تركيب الخدمة)">
+          <response text="How to use Group Service (طريقة استعمال مجموعة الخدمات)">
+            <link text="See: Service User Guide (طريقة تشغيل الخدمات: دليل المستخدم)" url="../../document/service-activation-and-management-user-guide.aspx"/>
+          </response>
+        </response>
+        <selection text="Group Service does not work (مجموعة الخدمات لا تعمل)"/>
+      </inquery>
+
+      <inquery text="International Calling (الصفر الدولي)">
+        <response text="Check if user has international zero or call barring (تأكد من وجود الصفر أو التحكم بالصفر)">
+          <response text="How to use International Call Barring (طريقة استعمال خدمة التحكم بالصفر الدولي)">
+            <link text="See: Service User Guide (طريقة تشغيل الخدمات: دليل المستخدم)" url="../../document/service-activation-and-management-user-guide.aspx"/>
+          </response>
+        </response>
+        <selection text="Intl calling does not work (الاتصال الدولي لا يعمل)"/>
+        <selection text="Intl call barring does not work (التحكم بالصفر الدولي لا يعمل)"/>
+      </inquery>
+
+      <inquery text="Internet (إنترنت)">
+        <response text="HSI Internet does not work (الإنترنت عالي السرعة لا يعمل)">
+          <inquery text="Did the Internet ever worked, or only recently stopped (هل كان يعمل من قبل)">
+            <selection text="HSI Internet never worked before (الإنترنت عالي السرعة لم يعمل منذ التركيب)"/>
+            <selection text="HSI Internet worked before (الإنترنت عالي السرعة كان يعمل)"/>
+          </inquery>
+        </response>
+        <response text="Dialup Internet does not work (إنترنت الكرت لا يعمل)">
+          <inquery text="Did the Internet ever worked, or only recently stopped (هل كان يعمل من قبل)">
+            <selection text="Dialup Internet never worked before (إنترنت الكرت لم يعمل منذ التركيب)"/>
+            <selection text="Dialup Internet worked before (إنترنت الكرت كان يعمل)"/>
+          </inquery>
+        </response>
+      </inquery>
+
+      <inquery text="Fiber line (خط الفايبر الرقمي)">
+        <selection text="Fiber line cut (خط الفايبر الرقمي مقطوع)"/>
+      </inquery>
+
+      <response text="Operate International Call Barring (طريقة استعمال خدمة التحكم بالصفر الدولي)">
+        <link text="See: Service User Guide (طريقة تشغيل الخدمات: دليل المستخدم)" url="../../document/service-activation-and-management-user-guide.aspx"/>
+      </response>
+
+      <response text="Information on how to activate and use services (طريقة تشغيل الخدمات)">
+        <link text="See: Service Activation and Management: User Guide (طريقة تشغيل الخدمات: دليل المستخدم)" url="../../document/service-activation-and-management-user-guide.aspx"/>
+      </response>
+
+      <response text="Information on the ONT (معلومات عن الجهاز المنزلي)">
+        <link text="Brief Description of the Features of Your ONT Device" url="../../document/brief-description-of-the-features-of-your-ont-device-user-guide.html"/>
+        <link text="وصف موجز لمزايا جهاز الشبكة الهاتفية في بيتك" url="../../document/brief-description-of-the-features-of-your-ont-device-user-guide-arabic.html"/>
+      </response>
+
+    </indication>
+
+  </customerCare>
+
+  <service>
+    <typeList>
+      <type id="1" name="Dn" arabicName=""/>
+      <type id="2" name="Ont Name" arabicName=""/>
+      <type id="3" name="No Ont" arabicName=""/>
+      <type id="0" name="Unspecified" arabicName="غير محدد"/>
+    </typeList>
+  </service>
+
+</report>
+

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<!--
+This file is part of the NGN project
+
+Notes:
+- I had to add fixed guid (with special 00000000- prefix) values to preserve framework id.
+
+    <framework id="1" guid="00000000-0464-4533-90eb-fdef2806041e" type="authority" name="" arabicName="الهيئة العامة لتنظيم الاتصالات وتقنية المعلومات">
+    </framework>
+
+-->
+
+<administration>
+
+  <frameworkList>
+
+    <framework id="1" guid="00000000-3f92-4b24-9d73-d1af53df5d05" type="ministry" name="" arabicName="وزارة المواصلات">
+
+      <framework id="1" guid="00000000-fd6d-4ec7-a7cf-bb8f03cb959a" type="sector" name="" arabicName="قطاع الاتصالات والخدمات المساندة">
+
+        <framework id="1" guid="00000000-70ff-495b-bd5d-3d940bf4e943" type="department" name="" arabicName="إدارة شبكة الألياف الضوئية">
+
+          <framework id="1" guid="00000000-0b06-44c6-b793-6ba262726591" type="division" name="" arabicName="مراقبة تقنية المعلومات">
+            <framework id="1" guid="00000000-73c9-4f5f-8e5e-c319ffbe3611" type="section" name="" arabicName="قسم دعم تشغيل الشبكة"/>
+            <framework id="2" guid="00000000-633e-4ae5-9ae4-1ef532c8cb11" type="section" name="" arabicName="قسم تقنية المعلومات"/>
+          </framework>
+
+          <framework id="2" guid="00000000-0145-4068-adaa-2d6f8e5e2461" type="division" name="" arabicName="مراقبة الدعم الفنى للشبكة">
+            <framework id="1" guid="00000000-b14b-4b11-b87d-03df25ddd272" type="section" name="" arabicName="قسم عمليات الشبكة"/>
+            <framework id="2" guid="00000000-8f26-4cf5-8cfc-e6bee3bb5022" type="section" name="" arabicName="قسم الدعم الفني للشبكة"/>
+          </framework>
+
+          <framework id="3" guid="00000000-09ac-4795-846c-012d8fb67073" type="division" name="" arabicName="مراقبة تشغيل الشبكة">
+            <framework id="1" guid="00000000-87d0-4696-bb57-46e3231da44c" type="section" name="" arabicName="قسم الخطوط الطرفية"/>
+            <framework id="2" guid="00000000-8014-49df-a903-3cf201d4175e" type="section" name="" arabicName="قسم خطوط النقل"/>
+            <framework id="3" guid="00000000-0df1-43ef-96a8-84e3f9001a10" type="section" name="" arabicName="قسم تشغيل المقاسم"/>
+          </framework>
+
+          <framework id="4" guid="00000000-6040-45c1-ab6a-058d20851fa1" type="division" name="" arabicName="مراقبة خدمات الشبكة">
+            <framework id="1" guid="00000000-bb87-4f11-be2a-c56da52eb2be" type="section" name="" arabicName="قسم خدمات الشبكة"/>
+            <framework id="2" guid="00000000-916c-4d9b-97bf-a95fbc674a64" type="section" name="" arabicName="قسم تشغيل الخدمات"/>
+          </framework>
+
+        </framework>
+
+      </framework>
+
+      <framework id="2" guid="00000000-58a2-4aa0-aafd-6960c7fedbe5" type="sector" name="" arabicName="قطاع خدمات المشتركين">
+        <framework id="1" guid="00000000-bc96-4034-b24c-89df9845df31" type="department" name="" arabicName="إدارة الخدمات الهاتفية">
+          <framework id="1" guid="00000000-770f-4c5d-824f-c39d09df139e" type="division" name="" arabicName="مراقبة الصيانة والشكاوى">
+            <!--
+            <framework id="1" guid="" type="section" name="" arabicName="قسم"/>
+            -->
+          </framework>
+        </framework>
+
+      </framework>
+    </framework>
+
+    <framework id="2" guid="00000000-b7f8-4c63-b1f7-a1773e9bcf92" type="supplier" name="Nokia" arabicName="نوكيا"/>
+
+    <framework id="3" guid="00000000-d754-4582-b1c3-dea8858dfc67" type="supplier" name="Huawei" arabicName="هواوي"/>
+
+  </frameworkList>
+
+
+  <!-- define authorization -->
+  <authorization>
+    <authorityList>
+      <authority id="1" name="Read ONT info through Twitter" arabicName="" allowedFrameworkArabicName="إدارة شبكة الألياف الضوئية" allowedHeadOnly="false" medium="twitter" system="ams" process="ont" function="read-ontname-info" >
+        <parameterRegex>read regex</parameterRegex>
+        <responseRegex>result regex</responseRegex>
+        <help>For help send "help" in a direct message. </help>
+      </authority>
+    </authorityList>
+  </authorization>
+
+
+  <category name="Gold ذهبية" description="(example 25633333)" regex="^2.*(\d)\1\1\1\1.*$" color="Goldenrod"/>
+  <category name="Silver فضية" description="(example 25622227)" regex="^2.*(\d)\1\1\1.*$" color="DarkGray"/>
+  <category name="Bronze برونزية" description="(example 25633144,25633352)" regex="^2.*(\d)\1\1.*$|^2.*(\d)\2.*(\d)\3.*$" color="Peru"/>
+
+  <category name="Group 1" description="" regex="^2\d(\d)(\d)(\d)\1\2\3$"/>
+  <category name="Group 2" description="" regex="^2.*(\d)(\d)(\d).*\1\2\3.*$"/>
+  <category name="Group 3" description="" regex="^2\d\d.+(\d)(\d)\1\2$"/>
+
+  <category name="Group 4" description="" regex="^2\d\d.+(\d)(\d)\2\1$"/>
+  <category name="Group 5" description="" regex="^2\d\d(\d)(\d).+\1\2$"/>
+  <category name="Group 6" description="" regex="^2\d\d.*(\d)(\d).*\1\2.*$"/>
+  <category name="Group 7" description="" regex="^2\d\d(\d)(\d).+\2\1.*$"/>
+  <category name="Group 8" description="" regex="^2\d\d(\d).\1.\1$"/>
+  <category name="Group 9" description="" regex="^2\d\d.*(\d)(\d).*\2\1.*$"/>
+
+  <category name="Group 10" description="" regex="^2.*(01234|12345|23456|34567|45678|56789).*$"/>
+  <category name="Group 11" description="" regex="^2.*(0123|1234|2345|3456|4567|5678|6789).*$"/>
+  <category name="Group 12" description="" regex="^2.*(012|123|234|345|456|567|678|789|890).*$"/>
+
+  <category name="Group 13" description="" regex="^2\d\d.*(\d).*\1\1.*$"/>
+  <category name="Group 14" description="" regex="^2\d\d.*(\d)\1.*\1.*$"/>
+  <category name="Group 15" description="" regex="^2.*(\d)(\d).*\1\2.*$"/>
+  <category name="Group 16" description="" regex="^2\d\d.*(\d)\1.*$"/>
+
+  <category name="Rest" arabicName="أخرى" description="" regex="^2\d\d\d\d\d\d\d"/>
+
+  <!--
+  below: id numbers >= 20 indicate international call disconnects
+  -->
+
+  <disconnect id="1" name="Account" arabicName="محاسبة" description="مبالغ مالية" />
+  <disconnect id="2" name="Programmed" arabicName="مبرمج"/>
+  <disconnect id="3" name="Committee: Residential Service in Commercial" arabicName="لجنة: منزلي في تجاري" description="هاتف منزلي يعمل في محل تجاري" />
+  <disconnect id="4" name="Committee: Disconnecting" arabicName="لجنة: رفع" description="قطع حرارة مع رفع الفيوز" />
+  <disconnect id="5" name="Committee: International Call Selling" arabicName="لجنة: متاجرة بالمكالمات" description="متاجرة بالمكالمات الدولية" />
+  <disconnect id="6" name="Committee: Distroying Ministry Equipment" arabicName="لجنة: إتلاف خدمات وزارة" description="إتلاف خدمات وزارة" />
+  <disconnect id="7" name="Harassment" arabicName="معاكسة"/>
+  <disconnect id="8" name="Contact customer service" arabicName="مراجعة خدمة العملاء"/>
+  <disconnect id="10" name="Other Service" arabicName="هاتف ءاخر" description="قطع حرارة هاتف بسبب عدم السداد لهاتف ءاخر" />
+  <disconnect id="20" name="Programmed: International Call" arabicName="مبرمج: قطع الدولي"/>
+
+</administration>
+
+

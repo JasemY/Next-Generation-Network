@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<!--
+SELECT DISTINCT customer_id
+FROM            ia_service_request
+WHERE        (service_category_id = 49)
+
+SELECT DISTINCT svlan
+FROM            ia_ont_hsi
+
+
+Match ids here with those of enum in hsi.cs
+
+-->
+
+<hsi>
+
+  <ispList>
+    <isp id="1" active="true" name="Qualitynet" arabicName="كوالتى نت" description="شركة كوالتى نت" lan="301"/>
+    <isp id="2" active="true" name="Fasttelco" arabicName="فاست" description="شركة فاست للاتصالات" lan="302"/>
+    <isp id="3" active="true" name="UnitedNetworks" arabicName="متحدة" lan="303" description="شركة شبكة الخليج للاتصالات"/>
+    <isp id="4" active="true" name="KEMS-Zajel" arabicName="زاجل" lan="304" description="مؤسسة شبكة الخليج للتجارة العامة" />
+    <isp id="5" active="true" name="Fasttelco-Data" arabicName="فاست" description="شركة فاست للاتصالات" lan="402"/>
+    <isp id="6" active="true" name="SIP" arabicName="SIP" description="" lan="131" />
+    <isp id="7" active="true" name="MOC1" arabicName="مواصلات" description="" lan="305" />
+    <isp id="8" active="true" name="MOC2" arabicName="مواصلات" description="" lan="306" />
+    <isp id="9" active="true" name="MOC3" arabicName="مواصلات" description="" lan="307"/>
+    <isp id="10" active="true" name="UnitedNetworks-Data" arabicName="متحدة" lan="403" description="شركة شبكة الخليج للاتصالات"/>
+    <isp id="11" active="true" name="Qualitynet-Data" arabicName="كوالتى نت" lan="401" description="شركة كوالتى نت" />
+    <isp id="12" active="true" name="Huawei" arabicName="هواوي" lan="100" description="هواوي" />
+  </ispList>
+
+  <profileList>
+    <profile id="2" name="64Kb/s" description=""/>
+    <profile id="3" name="128Kb/s" description=""/>
+    <profile id="4" name="256Kb/s" description=""/>
+    <profile id="5" name="512Kb/s" description=""/>
+    <profile id="6" name="1024Kb/s" description=""/>
+    <profile id="7" name="8192Kb/s" description=""/>
+    <profile id="20" name="20Mb/s" description=""/>
+    <profile id="50" name="50Mb/s" description=""/>
+  </profileList>
+
+</hsi>

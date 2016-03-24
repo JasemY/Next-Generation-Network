@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+NETWORK DESIGN DOCUMENT (NDD)
+
+This document provides the network functional and physical architecture and contains the required data to prepare the configuration of the NGN core and network elements.
+-->
+
+<networkDesignDocument>
+
+  <network id="1" name="Next Generation Network - Kuwait">
+
+    <!--
+GPON Gigabit Passive Optical Network
+MGC medium Gateway Controller
+MGW medium Gateway
+NDD Network Design Document
+NGN New Generation Network
+OAM Operation and Maintenance
+VLAN Virtual Local Area Network
+VPLS Virtual Private LAN Service
+
+Note:
+- ANY change in ids will effect all corresponding Ont and Olt ids and foreign keys in database
+- All ids must be unique.
+- This document had been modified and it constitues the standard now.
+- PonList will have:
+  - 32 entries for No 7342
+  - 256 entries for No 7360.
+  - 56 for NS.
+- In ponList, '*' means a spare PON.
+-->
+
+    <!--
+
+LEX (Aggregation),Area,Deployment Type,Access Type,OLT vedor / contractor,Total No. Of OLTs ,Total No of ONTs,working lines,NGN Lines to be provided
+
+MGF,Fahahhel,Migration,Fibre OLT,Nokia,8,1800,10000,15000
+,Abu Helaifah,Migration,Fibre OLT,Nokia,5,840,5600,8000
+,Mangaf ,Migration,Fibre OLT,Nokia,3,458,2400,5000
+,mangaf, almahbolah,Acess Node Upgrade,Copper,n/a,n/a,n/a,11000,15000
+
+JHR,Naseem,Migration,Fibre OLT,Nokia,2,1116,1500,2000
+,Waha,Migration,Fibre OLT,Nokia,3,1812,1300,2500
+,Jahra, Qaser, Tima…etc,Acess Node Upgrade,Copper,n/a,n/a,n/a,22000,30000
+
+QRN,Mubarak Al-Kaber,Migration,Fibre OLT,Nokia,5,3592,5500,8000
+,Qurain,Migration,Fibre OLT,Nokia,4,2726,4750,7000
+,Adan, Qousoor,Acess Node Upgrade,Copper,n/a,n/a,n/a,11000,15000
+
+FNT,fintas Zera'e,Migration,Fibre OLT,Nokia-Siemens,1,376,1500,1500
+,Fintas,Acess Node Upgrade,Copper,n/a,n/a,n/a,6000,8000
+
+KHR,Khairan City,Green Field,Fibre OLT,Nokia-Siemens,1,1300,4000,4000
+
+KHR,Khairan Pearl,Green Field,Fibre OLT,Nokia-Siemens,5,4324,10000,10000
+
+ 
+-->
+    <!-- ============================================= -->
+
+    <site id="1" name="SKB" arabicName="شويخ" areaSymbolList="SKB">
+      <router id="1" name="" type="" domainList="2481,2482,2483,2484" vendorShortName="Hu">
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+
+        <msan id="1" type="" name="" symbol="" ponList="" vendorShortName=""/>
+
+      </router>
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="2" name="QRN" arabicName="قرين" areaSymbolList="Mubarak Al Kabeer,Qurain,Sabah Al Salem,Adan,Qusoor">
+      <!-- ,2456,2457,2458,2459 -->
+      <router id="1" name="QRN_7750-7" type="7750-SR7" domainList="2541,2542,2543,2544,2545" vendorShortName="Hu">
+        <!-- <interface type="system" ip="10.1.1.2/32" /> -->
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+
+        <signaling network="10.255.253.64" subnetMask="255.255.255.224" />
+        <medium network="10.255.253.96" subnetMask="255.255.255.224" />
+
+        <mgw type="A7510" />
+
+        <odf id="1" name="MUB" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="MUB-1" amsName="MUB-1-1" symbol="MUB" ponList="1-30,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="11" networkNumber="10.12.0.0" gatewayIp="10.12.7.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="MUB-2" amsName="MUB-1-2" symbol="MUB" ponList="31-60,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="12" networkNumber="10.12.16.0" gatewayIp="10.12.23.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="MUB-3" amsName="MUB-2-1" symbol="MUB" ponList="61-90,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="13" networkNumber="10.12.32.0" gatewayIp="10.12.39.254" imsService="" edgeRouter="" />
+          <olt id="4" type="7342" name="MUB-4" amsName="MUB-2-2" symbol="MUB" ponList="91-120,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="14" networkNumber="10.12.48.0" gatewayIp="10.12.55.254" imsService="" edgeRouter="" />
+          <olt id="5" type="7342" name="MUB-5" amsName="MUB-3-1" symbol="MUB" ponList="121-149,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="15" networkNumber="10.12.64.0" gatewayIp="10.12.71.254" imsService="" edgeRouter="" />
+        </odf>
+
+        <odf id="2" name="QRN" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="QRN-1" amsName="QRN-1-1" symbol="QRN" ponList="1-30,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="16" networkNumber="10.12.80.0" gatewayIp="10.12.87.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="QRN-2" amsName="QRN-1-2" symbol="QRN" ponList="31-60,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="17" networkNumber="10.12.96.0" gatewayIp="10.12.103.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="QRN-3" amsName="QRN-2-1" symbol="QRN" ponList="61-90,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="18" networkNumber="10.12.112.0" gatewayIp="10.12.119.254" imsService="" edgeRouter="" />
+          <olt id="4" type="7342" name="QRN-4" amsName="QRN-2-2" symbol="QRN" ponList="91-117,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="19" networkNumber="10.12.128.0" gatewayIp="10.12.135.254" imsService="" edgeRouter="" />
+        </odf>
+
+      </router>
+
+      <router id="2" name="" type="" domainList="2551,2552" vendorShortName="Hu">
+        <msan id="1" type="" name="" symbol="" ponList="" vendorShortName=""/>
+      </router>
+
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="3" name="ARD" arabicName="عارضية" areaSymbolList="Sabah Al Naser,Qayrawan">
+      <router id="1" name="ARD_7450-1" type="7450-ESS1" domainList="2490,2466" vendorShortName="No">
+        <!-- <interface type="system" ip="10.1.1.3/32" /> -->
+
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+        <internal subnetMask="255.255.248.0" />
+        <!-- <external subnetMask="255.255.248.0" /> -->
+
+        <odf id="1" name="ARD" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="ARD-1" amsName="SBN-1-1" symbol="SBN" ponList="1-28,59,60,*,*" mgcIp="10.16.1.40" mgcSecondaryIp="10.16.5.40" vlan="10" networkNumber="10.2.0.0" gatewayIp="10.2.7.254" imsService="9" edgeRouter="TECICS01" />
+          <olt id="2" type="7342" name="ARD-2" amsName="SBN-1-2" symbol="SBN" ponList="29-58,*,*" mgcIp="10.16.1.40" mgcSecondaryIp="10.16.5.40" vlan="20" networkNumber="10.2.16.0" gatewayIp="10.2.23.254" imsService="9" edgeRouter="TECICS01" />
+        </odf>
+
+        <odf id="2" name="SLB" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <!-- New PONs: QRW: 7,9,10,44,58-67 -->
+          <olt id="1" type="7342" name="SLB-1" amsName="QRW-1-1" symbol="QRW" ponList="1-6,8,11-31,7,9,10,*" mgcIp="10.16.1.37" mgcSecondaryIp="10.16.5.37" vlan="30" networkNumber="10.2.32.0" gatewayIp="10.2.39.254" imsService="6" edgeRouter="TECICS01" />
+          <olt id="2" type="7342" name="SLB-2" amsName="QRW-1-2" symbol="QRW" ponList="32-39,68,40-43,45-57,44,*,*,*,*,*" mgcIp="10.16.1.38" mgcSecondaryIp="10.16.5.38" vlan="40" networkNumber="10.2.48.0" gatewayIp="10.2.55.254" imsService="7" edgeRouter="TECICS01" />
+          <olt id="3" type="7360" name="SLB-3" amsName="QRW-2-1" symbol="QRW" ponList="58-67,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" mgcIp="10.16.5.36" mgcSecondaryIp="10.16.1.36" vlan="60" networkNumber="10.4.144.0" gatewayIp="10.4.151.254" imsService="5" edgeRouter="SKBICS02" />
+        </odf>
+      </router>
+
+      <router id="2" name="" type="" domainList="2480" vendorShortName="Hu">
+        <msan id="1" type="" name="ARD-B" symbol="" ponList="" vendorShortName=""/>
+      </router>
+
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="4" name="JHR" arabicName="جهراء" areaSymbolList="Saad Al Abdullah,Nahda,Waha,Naseem">
+      <router id="1" name="JHB_7450-1" type="7450-ESS1" domainList="2453,2454,2497" vendorShortName="No">
+        <!-- <interface type="system" ip="10.1.1.4/32" /> -->
+
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+        <internal subnetMask="255.255.248.0" />
+        <!-- <external subnetMask="255.255.248.0" /> -->
+
+        <odf id="1" name="JHR" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="JHR-1" amsName="JHR-1-1" symbol="SJA" ponList="1-28,*,*,*,*" mgcIp="10.16.1.34" mgcSecondaryIp="10.16.5.34" vlan="10" networkNumber="10.2.80.0" gatewayIp="10.2.87.254" imsService="3" edgeRouter="TECICS01" />
+          <olt id="2" type="7342" name="JHR-2" amsName="JHR-1-2" symbol="SJA" ponList="29-56,*,*,*,*" mgcIp="10.16.1.35" mgcSecondaryIp="10.16.5.35" vlan="20" networkNumber="10.2.96.0" gatewayIp="10.2.103.254" imsService="4" edgeRouter="TECICS01" />
+          <olt id="3" type="7342" name="JHR-3" amsName="JHR-2-1" symbol="SJA" ponList="57-84,*,*,*,*" mgcIp="10.16.1.35" mgcSecondaryIp="10.16.5.35" vlan="30" networkNumber="10.2.112.0" gatewayIp="10.2.119.254" imsService="4" edgeRouter="TECICS01" />
+          <olt id="4" type="7342" name="JHR-4" amsName="JHR-2-2" symbol="SJA" ponList="85-112,*,*,*,*" mgcIp="10.16.1.36" mgcSecondaryIp="10.16.5.36" vlan="40" networkNumber="10.2.128.0" gatewayIp="10.2.135.254" imsService="5" edgeRouter="TECICS01" />
+          <olt id="5" type="7342" name="JHR-5" amsName="JHR-3-1" symbol="SJA" ponList="113-140,*,*,*,*" mgcIp="10.16.1.36" mgcSecondaryIp="10.16.5.36" vlan="50" networkNumber="10.2.144.0" gatewayIp="10.2.151.254" imsService="5" edgeRouter="TECICS01" />
+          <olt id="6" type="7342" name="JHR-6" amsName="JHR-3-2" symbol="SJA" ponList="141-169,*,*,200" mgcIp="10.16.1.37" mgcSecondaryIp="10.16.5.37" vlan="60" networkNumber="10.2.160.0" gatewayIp="10.2.167.254" imsService="6" edgeRouter="TECICS01" />
+        </odf>
+
+        <odf id="2" name="SUL" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="SUL-1" amsName="SUL-1-1" symbol="ESU" ponList="1-22,*,*,*,*,*,*,*,*,*,*" mgcIp="10.16.5.36" mgcSecondaryIp="10.16.1.36" vlan="70" networkNumber="10.2.176.0" gatewayIp="10.2.183.254" imsService="5" edgeRouter="SKBICS02" />
+        </odf>
+
+              <odf id="3" name="SAA" primaryIp="" secondaryIp="" subnetMask="255.255.224.0" vendorShortName="No">
+          <olt id="3" type="7360" name="SAA-1" amsName="SAA-1-1" symbol="SAA" ponList="1-256" mgcIp="10.16.5.37" mgcSecondaryIp="10.16.1.37" vlan="13" networkNumber="10.4.208.1" gatewayIp="10.4.239.254" imsService="6" edgeRouter="SKBICS01" />
+
+            <!--
+Voice vlan: 80
+OAM vlan: 4093
+BRAS vlan for residential: 300
+BRAS vlan for business: 400
+      -->
+
+</odf>
+</router>
+
+      <router id="2" name="" type="" domainList="2455,2456,2457,2458" vendorShortName="Hu">
+        <odf id="1" name="WAH" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="WAH-1" amsName="WAH-1-1" symbol="WAH" ponList="1-24,*,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="11" networkNumber="10.10.144.0" gatewayIp="10.10.151.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="WAH-2" amsName="WAH-1-2" symbol="WAH" ponList="25-48,*,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="12" networkNumber="10.10.160.0" gatewayIp="10.10.167.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="WAH-3" amsName="WAH-2-1" symbol="WAH" ponList="49-72,*,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="13" networkNumber="10.10.176.0" gatewayIp="10.10.183.254" imsService="" edgeRouter="" />
+        </odf>
+
+        <odf id="2" name="NAS" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="NAS-1" amsName="NAS-1-1" symbol="NAS" ponList="1-24,*,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="14" networkNumber="10.10.192.0" gatewayIp="10.10.199.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="NAS-2" amsName="NAS-1-2" symbol="NAS" ponList="25-49,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="15" networkNumber="10.10.208.0" gatewayIp="10.10.215.254" imsService="" edgeRouter="" />
+        </odf>
+      </router>
+      
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="5" name="JLS" arabicName="جليب الشيوخ" areaSymbolList="Abdullah Al Mubarak,Eshbiliya">
+      <router id="1" name="JLS_7450-1" type="7450-ESS1" domainList="2435,2436,2438" vendorShortName="No">
+        <!-- <interface type="system" ip="10.1.1.5/32" /> -->
+
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+        <internal subnetMask="255.255.248.0" />
+        <!-- <external subnetMask="255.255.248.0" /> -->
+
+        <odf id="1" name="ABM" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="ABM-1" amsName="ABM-1-1" symbol="ABM" ponList="1-28,*,*,*,*" mgcIp="10.16.5.37" mgcSecondaryIp="10.16.1.37" vlan="10" networkNumber="10.2.192.0" gatewayIp="10.2.199.254" imsService="6" edgeRouter="SKBICS02" />
+          <olt id="2" type="7342" name="ABM-2" amsName="ABM-1-2" symbol="ABM" ponList="29-56,*,*,*,*" mgcIp="10.16.5.38" mgcSecondaryIp="10.16.1.38" vlan="20" networkNumber="10.2.208.0" gatewayIp="10.2.215.254" imsService="7" edgeRouter="SKBICS02" />
+          <olt id="3" type="7342" name="ABM-3" amsName="ABM-2-1" symbol="ABM" ponList="57-84,*,*,*,*" mgcIp="10.16.5.31" mgcSecondaryIp="10.16.1.31" vlan="30" networkNumber="10.2.224.0" gatewayIp="10.2.231.254" imsService="0" edgeRouter="SKBICS02" />
+          <olt id="4" type="7342" name="ABM-4" amsName="ABM-2-2" symbol="ABM" ponList="85-112,*,*,*,*" mgcIp="10.16.5.39" mgcSecondaryIp="10.16.1.39" vlan="40" networkNumber="10.2.240.0" gatewayIp="10.2.247.254" imsService="8" edgeRouter="SKBICS02" />
+          <olt id="5" type="7342" name="ABM-5" amsName="ABM-3-1" symbol="ABM" ponList="113-140,*,*,*,*" mgcIp="10.16.5.39" mgcSecondaryIp="10.16.1.39" vlan="50" networkNumber="10.3.0.0" gatewayIp="10.3.7.254" imsService="8" edgeRouter="SKBICS02" />
+          <olt id="6" type="7342" name="ABM-6" amsName="ABM-3-2" symbol="ABM" ponList="141-168,*,*,*,*" mgcIp="10.16.5.40" mgcSecondaryIp="10.16.1.40" vlan="60" networkNumber="10.3.16.0" gatewayIp="10.3.23.254" imsService="9" edgeRouter="SKBICS02" />
+          <olt id="7" type="7342" name="ABM-7" amsName="ABM-4-1" symbol="ABM" ponList="169-194,*,*,*,*,*,200" mgcIp="10.16.5.40" mgcSecondaryIp="10.16.1.40" vlan="70" networkNumber="10.3.32.0" gatewayIp="10.3.39.254" imsService="9" edgeRouter="SKBICS02" />
+        </odf>
+
+        <odf id="2" name="ESB" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="ESH-8" amsName="ESH-1-1" symbol="ESH" ponList="1-28,*,*,*,*" mgcIp="10.16.1.38" mgcSecondaryIp="10.16.5.38" vlan="80" networkNumber="10.3.48.0" gatewayIp="10.3.55.254" imsService="7" edgeRouter="TECICS01" />
+          <olt id="2" type="7342" name="ESH-9" amsName="ESH-1-2" symbol="ESH" ponList="29-56,*,*,*,*" mgcIp="10.16.1.39" mgcSecondaryIp="10.16.5.39" vlan="90" networkNumber="10.3.64.0" gatewayIp="10.3.71.254" imsService="8" edgeRouter="TECICS01" />
+          <olt id="3" type="7342" name="ESH-10" amsName="ESH-2-1" symbol="ESH" ponList="57-73,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" mgcIp="10.16.1.39" mgcSecondaryIp="10.16.5.39" vlan="50" networkNumber="10.2.64.0" gatewayIp="10.2.71.254" imsService="8" edgeRouter="TECICS01" />
+        </odf>
+
+      </router>
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="6" name="RKK" arabicName="رقة" areaSymbolList="Fahad Al Ahmad,Mangaf New,Sabahiya South">
+      <router id="1" name="RKK_7450-1" type="7450-ESS1" domainList="2363,2374" vendorShortName="No">
+        <!-- <interface type="system" ip="10.1.1.7/32" /> -->
+
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+        <internal subnetMask="255.255.248.0" />
+        <!-- <external subnetMask="255.255.248.0" /> -->
+
+        <odf id="1" name="RKK" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="RKK-1" amsName="RKK-1-1" symbol="FHD" ponList="1-18,47-56,*,*,*,200" mgcIp="10.16.5.34" mgcSecondaryIp="10.16.1.34" vlan="10" networkNumber="10.3.80.0" gatewayIp="10.3.87.254" imsService="3" edgeRouter="SKBICS02" />
+          <olt id="2" type="7342" name="RKK-2" amsName="RKK-1-2" symbol="FHD" ponList="19-46,*,*,*,*" mgcIp="10.16.5.35" mgcSecondaryIp="10.16.1.35" vlan="20" networkNumber="10.3.96.0" gatewayIp="10.3.103.254" imsService="4" edgeRouter="SKBICS02" />
+          <olt id="3" type="7342" name="RKK-3" amsName="RKK-2-1" symbol="FHD" ponList="57-84,*,*,*,*" mgcIp="10.16.5.35" mgcSecondaryIp="10.16.1.35" vlan="50" networkNumber="10.4.128.0" gatewayIp="10.4.135.254" imsService="4" edgeRouter="SKBICS02" />
+        </odf>
+
+        <odf id="2" name="MGF" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="MGF-1" amsName="MGF-1-1" symbol="MGF" ponList="7-38" mgcIp="10.16.5.36" mgcSecondaryIp="10.16.1.36" vlan="30" networkNumber="10.3.112.0" gatewayIp="10.3.119.254" imsService="5" edgeRouter="SKBICS02" />
+          <olt id="2" type="7342" name="MGF-2" amsName="MGF-1-2" symbol="MGF" ponList="39-53,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" mgcIp="10.16.5.37" mgcSecondaryIp="10.16.1.37" vlan="40" networkNumber="10.3.128.0" gatewayIp="10.3.135.254" imsService="6" edgeRouter="SKBICS02" />
+        </odf>
+
+        <!--
+        copper
+        <odf id="3" name="SSB" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="SSB-1" amsName="SSB-1-1" symbol="SSB" ponList="1-28,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="11" networkNumber="10.10.32.0" gatewayIp="10.10.39.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="SSB-2" amsName="SSB-1-2" symbol="SSB" ponList="29-56,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="12" networkNumber="10.10.48.0" gatewayIp="10.10.55.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="SSB-3" amsName="SSB-2-1" symbol="SSB" ponList="57-84,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="13" networkNumber="10.10.64.0" gatewayIp="10.10.71.254" imsService="" edgeRouter="" />
+          <olt id="4" type="7342" name="SSB-4" amsName="SSB-2-2" symbol="SSB" ponList="85-112,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="14" networkNumber="10.10.80.0" gatewayIp="10.10.87.254" imsService="" edgeRouter="" />
+          <olt id="5" type="7342" name="SSB-5" amsName="SSB-3-1" symbol="SSB" ponList="113-136,*,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="15" networkNumber="10.10.96.0" gatewayIp="10.10.103.254" imsService="" edgeRouter="" />
+        </odf>
+        -->
+
+      </router>
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="7" name="SSR" arabicName="سرة" areaSymbolList="Salam,Shuhada,Huteen,Zahra">
+      <router id="1" name="SUR_7450-1" type="7450-ESS1" domainList="2521,2522,2523,2524" vendorShortName="No">
+        <!-- <interface type="system" ip="10.1.1.8/32" /> -->
+
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+        <internal subnetMask="255.255.248.0" />
+        <!-- <external subnetMask="255.255.248.0" /> -->
+
+        <odf id="1" name="SUR" primaryIp="" secondaryIp="" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="SUR-1" amsName="SUR-1-1" symbol="SLA" ponList="1-9,*,11,12,*,14-21,22,23-30,32,31" mgcIp="10.16.5.31" mgcSecondaryIp="10.16.1.31" vlan="10" networkNumber="10.3.144.0" gatewayIp="10.3.151.254" imsService="0" edgeRouter="SKBICS02" />
+          <olt id="2" type="7342" name="SUR-2" amsName="SUR-1-2" symbol="SLA" ponList="33-62,*,*" mgcIp="10.16.5.38" mgcSecondaryIp="10.16.1.38" vlan="20" networkNumber="10.3.160.0" gatewayIp="10.3.167.254" imsService="7" edgeRouter="SKBICS02" />
+          <olt id="3" type="7342" name="SUR-3" amsName="SUR-2-1" symbol="SLA" ponList="63-94" mgcIp="10.16.5.32" mgcSecondaryIp="10.16.1.32" vlan="30" networkNumber="10.3.176.0" gatewayIp="10.3.183.254" imsService="1" edgeRouter="SKBICS02" />
+          <olt id="4" type="7342" name="SUR-4" amsName="SUR-2-2" symbol="SLA" ponList="95-98,*,*,101-124,*,*" mgcIp="10.16.5.32" mgcSecondaryIp="10.16.1.32" vlan="40" networkNumber="10.3.192.0" gatewayIp="10.3.199.254" imsService="1" edgeRouter="SKBICS02" />
+          <olt id="5" type="7342" name="SUR-5" amsName="SUR-3-1" symbol="SHD" ponList="1-30,*,*" mgcIp="10.16.1.32" mgcSecondaryIp="10.16.5.32" vlan="50" networkNumber="10.3.208.0" gatewayIp="10.3.215.254" imsService="1" edgeRouter="TECICS01" />
+          <olt id="6" type="7342" name="SUR-6" amsName="SUR-3-2" symbol="SHD" ponList="31-61,*" mgcIp="10.16.1.31" mgcSecondaryIp="10.16.5.31" vlan="60" networkNumber="10.3.224.0" gatewayIp="10.3.231.254" imsService="0" edgeRouter="TECICS01" />
+          <olt id="7" type="7342" name="SUR-7" amsName="SUR-4-1" symbol="HIT" ponList="1-28,*,*,*,*" mgcIp="10.16.5.33" mgcSecondaryIp="10.16.1.33" vlan="70" networkNumber="10.3.240.0" gatewayIp="10.3.247.254" imsService="2" edgeRouter="SKBICS02" />
+          <olt id="8" type="7342" name="SUR-8" amsName="SUR-4-2" symbol="HIT" ponList="29-56,*,*,*,*" mgcIp="10.16.5.33" mgcSecondaryIp="10.16.1.33" vlan="80" networkNumber="10.4.0.0" gatewayIp="10.4.7.254" imsService="2" edgeRouter="SKBICS02" />
+          <olt id="9" type="7342" name="SUR-9" amsName="SUR-5-1" symbol="HIT" ponList="57-81,*,*,*,*,*,*,*" mgcIp="10.16.5.34" mgcSecondaryIp="10.16.1.34" vlan="90" networkNumber="10.4.16.0" gatewayIp="10.4.23.254" imsService="3" edgeRouter="SKBICS02" />
+          <olt id="10" type="7342" name="SUR-10" amsName="SUR-5-2" symbol="ZAH" ponList="1-26,*,*,*,*,*,*" mgcIp="10.16.1.32" mgcSecondaryIp="10.16.5.32" vlan="100" networkNumber="10.4.32.0" gatewayIp="10.4.39.254" imsService="1" edgeRouter="TECICS01" />
+          <olt id="11" type="7342" name="SUR-11" amsName="SUR-6-1" symbol="ZAH" ponList="27-29,30-33,*,*,*,37-52,132,133,*,*,*,*" mgcIp="10.16.1.31" mgcSecondaryIp="10.16.5.31" vlan="110" networkNumber="10.4.48.0" gatewayIp="10.4.55.254" imsService="0" edgeRouter="TECICS01" />
+          <olt id="12" type="7342" name="SUR-12" amsName="SUR-6-2" symbol="ZAH" ponList="53-60,*,*,63-77,*,*,*,*,*,*,*" mgcIp="10.16.1.33" mgcSecondaryIp="10.16.5.33" vlan="120" networkNumber="10.4.64.0" gatewayIp="10.4.71.254" imsService="2" edgeRouter="TECICS01" />
+          <olt id="13" type="7342" name="SUR-13" amsName="SUR-7-1" symbol="ZAH" ponList="79-85,*,*,*,*,90-94,*,*,97-104,*,*,*,254,255,*" mgcIp="10.16.1.33" mgcSecondaryIp="10.16.5.33" vlan="130" networkNumber="10.4.80.0" gatewayIp="10.4.87.254" imsService="2" edgeRouter="TECICS01" />
+          <olt id="14" type="7342" name="SUR-14" amsName="SUR-7-2" symbol="ZAH" ponList="105,106,*,108-131,134,*,200,201,*" mgcIp="10.16.1.34" mgcSecondaryIp="10.16.5.34" vlan="140" networkNumber="10.4.96.0" gatewayIp="10.4.101.254" imsService="3" edgeRouter="TECICS01" />
+        </odf>
+
+      </router>
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="8" name="MGF-Old" arabicName="منقف" areaSymbolList="Abu Holaifa,Fahaheel,MGO">
+      
+      <router id="1" name="" type="" domainList="2371,2372" vendorShortName="Hu">
+        <msan id="1" type="" name="" symbol="" ponList="" vendorShortName=""/>
+      </router>
+      
+      <!--
+
+      <router id="1" name="" type="" domainList="2374" vendorShortName="No">
+
+        <oam id="1" network="10.255.250.0" subnetMask="255.255.255.0" gateway="10.255.250.250" vlan="4093" vpls="10" ftpIp="10.10.10.2" configFile="kuwait.xml" />
+        <internal subnetMask="255.255.248.0" />
+        <!- - <external subnetMask="255.255.248.0" /> - ->
+
+        <!- -
+        <odf id="1" name="ABH" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="ABH-1" amsName="ABH-1-1" symbol="ABH" ponList="1-30,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="11" networkNumber="10.11.0.0" gatewayIp="10.11.7.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="ABH-2" amsName="ABH-1-2" symbol="ABH" ponList="31-60,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="12" networkNumber="10.11.16.0" gatewayIp="10.11.23.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="ABH-3" amsName="ABH-2-1" symbol="ABH" ponList="61-90,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="13" networkNumber="10.11.32.0" gatewayIp="10.11.39.254" imsService="" edgeRouter="" />
+          <olt id="4" type="7342" name="ABH-4" amsName="ABH-2-2" symbol="ABH" ponList="91-120,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="14" networkNumber="10.11.48.0" gatewayIp="10.11.55.254" imsService="" edgeRouter="" />
+          <olt id="5" type="7342" name="ABH-5" amsName="ABH-3-1" symbol="ABH" ponList="121-145,*,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="15" networkNumber="10.11.64.0" gatewayIp="10.11.71.254" imsService="" edgeRouter="" />
+        </odf>
+
+        <odf id="2" name="FHH" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="FHH-1" amsName="FHH-1-1" symbol="FHH" ponList="1-30,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="16" networkNumber="10.11.80.0" gatewayIp="10.11.87.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="FHH-2" amsName="FHH-1-2" symbol="FHH" ponList="31-60,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="17" networkNumber="10.11.96.0" gatewayIp="10.11.103.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="FHH-3" amsName="FHH-2-1" symbol="FHH" ponList="61-90,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="18" networkNumber="10.11.112.0" gatewayIp="10.11.119.254" imsService="" edgeRouter="" />
+          <olt id="4" type="7342" name="FHH-4" amsName="FHH-2-2" symbol="FHH" ponList="91-120,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="19" networkNumber="10.11.128.0" gatewayIp="10.11.135.254" imsService="" edgeRouter="" />
+          <olt id="5" type="7342" name="FHH-5" amsName="FHH-3-1" symbol="FHH" ponList="121-150,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="20" networkNumber="10.11.144.0" gatewayIp="10.11.151.254" imsService="" edgeRouter="" />
+          <olt id="6" type="7342" name="FHH-6" amsName="FHH-3-2" symbol="FHH" ponList="151-180,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="21" networkNumber="10.11.160.0" gatewayIp="10.11.167.254" imsService="" edgeRouter="" />
+          <olt id="7" type="7342" name="FHH-7" amsName="FHH-4-1" symbol="FHH" ponList="181-210,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="22" networkNumber="10.11.176.0" gatewayIp="10.11.183.254" imsService="" edgeRouter="" />
+          <olt id="8" type="7342" name="FHH-8" amsName="FHH-4-2" symbol="FHH" ponList="211-236,*,*,*,*,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="23" networkNumber="10.11.192.0" gatewayIp="10.11.199.254" imsService="" edgeRouter="" />
+        </odf>
+
+        <odf id="3" name="MGF" primaryIp="10.10.9.253" secondaryIp="10.10.13.253" subnetMask="255.255.248.0" vendorShortName="No">
+          <olt id="1" type="7342" name="MGF-1" amsName="MGF-2-1" symbol="MGF" ponList="61-90,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="24" networkNumber="10.11.208.0" gatewayIp="10.11.215.254" imsService="" edgeRouter="" />
+          <olt id="2" type="7342" name="MGF-2" amsName="MGF-2-2" symbol="MGF" ponList="91-120,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="25" networkNumber="10.11.224.0" gatewayIp="10.11.231.254" imsService="" edgeRouter="" />
+          <olt id="3" type="7342" name="MGF-3" amsName="MGF-3-1" symbol="MGF" ponList="121-150,*,*" mgcIp="10.10.9.253" mgcSecondaryIp="10.10.13.253" vlan="26" networkNumber="10.11.240.0" gatewayIp="10.11.247.254" imsService="" edgeRouter="" />
+        </odf>
+        - ->
+
+      </router>
+    -->
+    </site>
+
+    <!-- ============================================= -->
+
+    <site id="9" name="SLB" arabicName="صليبية" areaSymbolList="">
+      <router id="1" name="" type="" domainList="2467" vendorShortName="Hu">
+        <msan id="1" type="" name="" symbol="" ponList="" vendorShortName=""/>
+      </router>
+    </site>
+
+    <site id="10" name="FNT" arabicName="فنطاس" areaSymbolList="">
+      <router id="1" name="" type="" domainList="2390" vendorShortName="Hu">
+        <msan id="1" type="" name="" symbol="" ponList="" vendorShortName=""/>
+      </router>
+    </site>
+
+    <!-- ============================================= -->
+    <!-- ============================================= -->
+
+
+    <!--
+    <site id="11" name="MSF" arabicName="مشرف" areaSymbolList="">
+      <router id="1" name="" type="" domainList="" vendorShortName="No"/>
+    </site>
+    -->
+
+    <!--
+    <site id="12" name="TEC" arabicName="مدينة" areaSymbolList="">
+      <router id="1" name="" type="" domainList="" vendorShortName="No">
+          <olt id="16" type="7342" name="TEC-1" amsName="TEC-1-1" symbol="TEC" ponList="" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="17" type="7342" name="TEC-2" amsName="TEC-1-2" symbol="TEC" ponList="" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="18" type="7342" name="TEC-3" amsName="TEC-2-1" symbol="TEC" ponList="" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="19" type="7342" name="TEC-4" amsName="TEC-2-2" symbol="TEC" ponList="" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="20" type="7342" name="TEC-5" amsName="TEC-3-1" symbol="TEC" ponList="" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="21" type="7342" name="TEC-6" amsName="TEC-4-1" symbol="TEC" ponList="" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="" gatewayIp="" imsService="" edgeRouter="" />
+      </router>
+    </site>
+    -->
+
+    <site id="13" name="SLM" arabicName="سالمية" areaSymbolList="Salwa,Rumaithiya,BDA">
+      <router id="1" name="" type="" domainList="2561,2571" vendorShortName="NS">
+        <odf id="1" name="" primaryIp="" secondaryIp="" subnetMask="" vendorShortName="NS">
+
+          <!-- olts have 56 pons -->
+          <olt id="1" type="?" name="SLW-1" amsName="SLW-1-1" symbol="SLW" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="2" type="?" name="SLW-2" amsName="SLW-1-2" symbol="SLW" ponList="57-112" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="3" type="?" name="SLW-3" amsName="SLW-2-1" symbol="SLW" ponList="113-168" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="4" type="?" name="SLW-4" amsName="SLW-2-2" symbol="SLW" ponList="169-224" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+
+          <olt id="5" type="?" name="SLW-5" amsName="RUM-3-1" symbol="RUM" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="6" type="?" name="SLW-6" amsName="RUM-3-2" symbol="RUM" ponList="57-112" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="7" type="?" name="SLW-7" amsName="RUM-4-1" symbol="RUM" ponList="113-168" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+
+          <olt id="8" type="?" name="SLW-8" amsName="BDA-4-2" symbol="BDA" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+
+          <olt id="9" type="?" name="RSL-1" amsName="RSL-1-1" symbol="RSL" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="10" type="?" name="RSL-2" amsName="RSL-1-2" symbol="RSL" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="11" type="?" name="RSL-3" amsName="RSL-2-1" symbol="RSL" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+          <olt id="12" type="?" name="RSL-4" amsName="RSL-2-2" symbol="RSL" ponList="1-56" mgcIp="" mgcSecondaryIp="" vlan="" networkNumber="0.0.0.0" gatewayIp="" imsService="" edgeRouter="" />
+
+        </odf>
+
+        <msan id="1" type="" name="SLM" symbol="" ponList="" vendorShortName=""/>
+      </router>
+    </site>
+
+  </network>
+
+  <!-- ============================================= -->
+  <!-- ============================================= -->
+
+  <vendorList>
+
+    <vendor id="1" name="Nokia" shortName="No" arabicName="نوكيا" imageUrl="~\image\nokia-icon.png"/>
+    <vendor id="2" name="Huawei" shortName="Hu" arabicName="هواوي" imageUrl="~\image\huawei-icon.png"/>
+    <vendor id="3" name="Nokia-Siemens" shortName="NS" arabicName="نوكيا-سيمنس" imageUrl="~\image\nokia-siemens-icon.png"/>
+
+  </vendorList>
+
+  <!-- ============================================= -->
+
+</networkDesignDocument>

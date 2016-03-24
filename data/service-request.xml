@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<serviceRequest>
+
+  <!--
+  Below: this defines the relation between two tables on different databases, the meanings of integer variables, and initial default values
+  -->
+
+  <statusList>
+    <status id="2001" arabicName="قيد الموافقة الفنية" />
+    <status id="2002" arabicName="قيد الدفع" />
+    <status id="2003" arabicName="قيد التنفيذ" />
+    <status id="2004" arabicName="تعذر التنفيذ" />
+    <status id="2005" arabicName="تم التنفيذ" />
+  </statusList>
+
+  <customer>
+    <categoryList>
+      <!--
+SELECT CUST_CAT_ID, CUST_CAT_NAME FROM MOC_OWNER.CUST_CATS        ,
+1,أفراد,
+10,جهات أخرى,
+100,غير معرف,
+2,جهات حكومية,
+3,جهات تجارية,
+4,هيئات دبلوماسية,
+5,أفراد عسكريين,
+6,أفراد دبلوماسيين,
+7,جهات دولية,
+8,مؤسسات تجارية,
+9,بنك مركزي,
+        -->
+
+      <category id="1" arabicName="أفراد"/>
+      <category id="2" arabicName="جهات حكومية" />
+      <category id="3" arabicName="جهات تجارية" />
+      <category id="4" arabicName="هيئات دبلوماسية"/>
+      <category id="5" arabicName="أفراد عسكريين" />
+      <category id="6" arabicName="أفراد دبلوماسيين" />
+      <category id="7" arabicName="جهات دولية" />
+      <category id="8" arabicName="مؤسسات تجارية" />
+      <category id="9" arabicName="بنك مركزي" />
+      <category id="10" arabicName="جهات أخرى" />
+      <category id="100" arabicName="غير معرف" />
+    </categoryList>
+  </customer>
+
+  <service>
+    <serviceList>
+      <!-- 
+Note: add new entries here and in the provisioning part, if applicable
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY HH24:MI:SS'
+
+SELECT SRV_ID, SRV_NAME FROM MOC_OWNER.SERVICES ORDER BY SRV_ID
+
+SRV_ID,SRV_NAME,
+1,خط هاتف,
+3,نداء عاجل,
+5,تحويل مكالمات,
+6,استشارة,
+7,منع الإتصال,
+8,ايقاف استقبال,
+9,خدمة الغائب,
+10,خدمة الإيقاظ,
+11,إختصار الرقم,
+12,خدمة الإنتظار,
+13,التحكم بالصفر الدولي,
+14,كاشف رقم,
+15,خدمة المحاسبة,
+17,نظام التحويل الآلي/بدالة رئيس,
+18,نظام التحويل الآلي/بدالة فرع,
+19,قطع النداء الآلي,
+20,النداء الآلي,
+21,رسم رقم مميز,
+22,رسوم كابل,
+23,مكالمات مصلحية -دفع,
+24,تعديل افتتاحي - مختلف,
+25,تدقيق,
+26,اقساط قيد التحصيل,
+27,تصحيح - قبض بنك,
+28,تجديد اشتراك,
+29,اشتراك,
+30,تدقيق قبض شك,
+31,تأمين,
+32,مكالمات دولية,
+33,رسوم تصليح هاتف,
+34,رسوم صيانة,
+35,تحويل إلى الأقساط,
+36,إسترجاع من الأقساط,
+37,برقية,
+38,مجموعة الخدمات,
+39,نقل خارجى,
+40,رفع خط,
+41,تغيير رقم,
+42,نقل داخلي,
+43,تنازل,
+44,تغيير نوع إشتراك,
+45,تعديل اسم,
+46,جهاز كاشف,
+47,جهاز تلفون,
+49,رسوم مودم,
+50,جهاز ترنكينك,
+51,جهاز تلكس,
+52,قطع حرارة,
+53,اعادة حرارة,
+54,اعادة تركيب,
+55,مفتاح بدالة,
+56,فرع بدالة,
+59,إيقاف فرع بدالة,
+60,إيقاف مفتاح بدالة,
+61,إيقاف إعادة تركيب,
+62,إيقاف مجموعة الخدمات,
+63,ايقاف التحويل الآلي/بدالة فرع,
+64,ايقاف التحويل الآلي/بدالة رئيس,
+65,إيقاف المحاسبة الذاتية,
+66,إيقاف كاشف,
+67,وقف التحكم بالصفر,
+68,إيقاف خدمة الإنتظار,
+69,إيقاف إختصار الرقم,
+70,إيقاف خدمة الإيقاظ,
+71,إيقاف خدمة الغائب,
+72,رد الإستقبال,
+73,إيقاف منع الإتصال,
+74,إيقاف استشارة,
+75,إيقاف التحويل,
+76,One Central Hot Line,
+77,ايقاف HOT LINE,
+78,نقل One Central Hot Line,
+79,نقل Multi-Central Hot Line,
+80,Multi-Central LL,
+81,مساحة مستخدمة كأجهزة,
+82,مساحة مستخدمة كمكاتب,
+83,إيقاف,
+84,هوائي على صاري اكبر من 240 م,
+85,هوائي على منصة اقل من 240 م,
+86,هوائي على برج حديدي,
+87,خط fiber,
+88,ايقاف FIBER,
+89,Basic Access,
+90,ايقاف,
+91,هوائي على برج خرساني,
+92,هوائي على مبنى الوزارة,
+93,ايقاف,
+94,E1 (PCM) DATA,
+95,ايقاف E1,
+96,E1 DATA VOICE,
+97,E1 VOICE,
+108,صندوق بريد,
+109,تأجير صندوق بريد,
+110,اصدار مفتاح صندوق,
+111,اصدار بدل فاقد مفتاح صندوق,
+120,تسجيل سفينة صغيرة,
+121,تجديد ترخيص,
+122,تسجيل دراجة بحرية,
+124,ترخيص المتاجرة بالاجهزة الاسلكية,
+126,طباعة فاتورة,
+
+129	خط هاتف مع نداء آلي
+131	خط ذهبي
+132	خط فضي
+133	خط برونزي
+271	تغيير اسم
+406	إنترنت ألياف ضوئية - مشترك
+407	إيقاف
+
+below: used in OFN SR:
+
+ServiceId
+1
+5
+12
+13
+14
+15
+19
+20
+38
+39
+40
+41
+42
+43
+44
+52
+53
+54
+55
+56
+59
+60
+62
+63
+64
+65
+66
+67
+68
+69
+70
+74
+75
+129
+131
+132
+133
+271
+406
+407
+608
+609
+
+-->
+
+      <service id="1" arabicName="خط هاتف" />
+      <service id="3" arabicName="نداء عاجل" />
+      <service id="5" arabicName="تحويل مكالمات" />
+      <service id="6" arabicName="استشارة" />
+      <service id="7" arabicName="منع الإتصال" />
+      <service id="8" arabicName="ايقاف استقبال" />
+      <service id="9" arabicName="خدمة الغائب" />
+      <service id="10" arabicName="خدمة الإيقاظ" />
+      <service id="11" arabicName="إختصار الرقم" />
+      <service id="12" arabicName="خدمة الإنتظار" />
+      <service id="13" arabicName="التحكم بالصفر الدولي" />
+      <service id="14" arabicName="كاشف رقم" />
+      <service id="15" arabicName="خدمة المحاسبة" />
+      <service id="17" arabicName="نظام التحويل الآلي/بدالة رئيس" />
+      <service id="18" arabicName="نظام التحويل الآلي/بدالة فرع" />
+      <service id="19" arabicName="قطع النداء الآلي" />
+      <service id="20" arabicName="النداء الآلي" />
+      <service id="21" arabicName="رسم رقم مميز" />
+      <service id="22" arabicName="رسوم كابل" />
+      <service id="23" arabicName="مكالمات مصلحية -دفع" />
+      <service id="24" arabicName="تعديل افتتاحي - مختلف" />
+      <service id="25" arabicName="تدقيق" />
+      <service id="26" arabicName="اقساط قيد التحصيل" />
+      <service id="27" arabicName="تصحيح - قبض بنك" />
+      <service id="28" arabicName="تجديد اشتراك" />
+      <service id="29" arabicName="اشتراك" />
+      <service id="30" arabicName="تدقيق قبض شك" />
+      <service id="31" arabicName="تأمين" />
+      <service id="32" arabicName="مكالمات دولية" />
+      <service id="33" arabicName="رسوم تصليح هاتف" />
+      <service id="34" arabicName="رسوم صيانة" />
+      <service id="35" arabicName="تحويل إلى الأقساط" />
+      <service id="36" arabicName="إسترجاع من الأقساط" />
+      <service id="37" arabicName="برقية" />
+      <service id="38" arabicName="مجموعة الخدمات" />
+      <service id="39" arabicName="نقل خارجى" />
+      <service id="40" arabicName="رفع خط" />
+      <service id="41" arabicName="تغيير رقم" />
+      <service id="42" arabicName="نقل داخلي" />
+      <service id="43" arabicName="تنازل" />
+      <service id="44" arabicName="تغيير نوع إشتراك" />
+      <service id="45" arabicName="تعديل اسم" />
+      <service id="46" arabicName="جهاز كاشف" />
+      <service id="47" arabicName="جهاز تلفون" />
+      <service id="49" arabicName="رسوم مودم" />
+      <service id="50" arabicName="جهاز ترنكينك" />
+      <service id="51" arabicName="جهاز تلكس" />
+      <service id="52" arabicName="قطع حرارة" />
+      <service id="53" arabicName="اعادة حرارة" />
+      <service id="54" arabicName="اعادة تركيب" />
+      <service id="55" arabicName="مفتاح بدالة" />
+      <service id="56" arabicName="فرع بدالة" />
+      <service id="59" arabicName="إيقاف فرع بدالة" />
+      <service id="60" arabicName="إيقاف مفتاح بدالة" />
+      <service id="61" arabicName="إيقاف إعادة تركيب" />
+      <service id="62" arabicName="إيقاف مجموعة الخدمات" />
+      <service id="63" arabicName="ايقاف التحويل الآلي/بدالة فرع" />
+      <service id="64" arabicName="ايقاف التحويل الآلي/بدالة رئيس" />
+      <service id="65" arabicName="إيقاف المحاسبة الذاتية" />
+      <service id="66" arabicName="إيقاف كاشف" />
+      <service id="67" arabicName="وقف التحكم بالصفر" />
+      <service id="68" arabicName="إيقاف خدمة الإنتظار" />
+      <service id="69" arabicName="إيقاف إختصار الرقم" />
+      <service id="70" arabicName="إيقاف خدمة الإيقاظ" />
+      <service id="71" arabicName="إيقاف خدمة الغائب" />
+      <service id="72" arabicName="رد استقبال" />
+      <service id="73" arabicName="إيقاف منع الإتصال" />
+      <service id="74" arabicName="إيقاف استشارة" />
+      <service id="75" arabicName="إيقاف التحويل" />
+      <service id="76" arabicName="One Central Hot Line" />
+      <service id="77" arabicName="ايقاف HOT LINE" />
+      <service id="78" arabicName="نقل One Central Hot Line" />
+      <service id="79" arabicName="نقل Multi-Central Hot Line" />
+      <service id="80" arabicName="Multi-Central LL" />
+      <service id="81" arabicName="مساحة مستخدمة كأجهزة" />
+      <service id="82" arabicName="مساحة مستخدمة كمكاتب" />
+      <service id="83" arabicName="إيقاف" />
+      <service id="84" arabicName="هوائي على صاري اكبر من 240 م" />
+      <service id="85" arabicName="هوائي على منصة اقل من 240 م" />
+      <service id="86" arabicName="هوائي على برج حديدي" />
+      <service id="87" arabicName="خط fiber" />
+      <service id="88" arabicName="ايقاف FIBER" />
+      <service id="89" arabicName="Basic Access" />
+      <service id="90" arabicName="ايقاف" />
+      <service id="91" arabicName="هوائي على برج خرساني" />
+      <service id="92" arabicName="هوائي على مبنى الوزارة" />
+      <service id="93" arabicName="ايقاف" />
+      <service id="94" arabicName="E1 (PCM) DATA" />
+      <service id="99" arabicName="ايقاف E1" />
+      <service id="96" arabicName="E1 DATA VOICE" />
+      <service id="97" arabicName="E1 VOICE" />
+      <service id="108" arabicName="صندوق بريد" />
+      <service id="109" arabicName="تأجير صندوق بريد" />
+      <service id="110" arabicName="اصدار مفتاح صندوق" />
+      <service id="111" arabicName="اصدار بدل فاقد مفتاح صندوق" />
+      <service id="120" arabicName="تسجيل سفينة صغيرة" />
+      <service id="121" arabicName="تجديد ترخيص" />
+      <service id="122" arabicName="تسجيل دراجة بحرية" />
+      <service id="124" arabicName="ترخيص المتاجرة بالاجهزة الاسلكية" />
+      <service id="126" arabicName="طباعة فاتورة" />
+
+      <service id="129" arabicName="خط هاتف مع نداء آلي"/>
+      <service id="131" arabicName="خط ذهبي"/>
+      <service id="132" arabicName="خط فضي"/>
+      <service id="133" arabicName="خط برونزي"/>
+      <service id="134" arabicName="خط رقم ثلاثي"/>
+      <service id="138" arabicName="قطع رقم ثلاثي"/>
+      <service id="145" arabicName="خط 800"/>
+      <service id="151" arabicName="نداء آلى"/>
+      <service id="155" arabicName="مفتاح بدالة"/>
+      <service id="156" arabicName="رقم رديف 800"/>
+      <service id="157" arabicName="إيقاف مفتاح بدالة"/>
+      <service id="158" arabicName="فرع بدالة"/>
+      <service id="159" arabicName="إيقاف فرع بدالة"/>
+      <service id="161" arabicName="خط ذهبي 800"/>
+      <service id="162" arabicName="خط فضي 800"/>
+      <service id="163" arabicName="خط برونزي 800"/>
+      <service id="271" arabicName="تغيير اسم"/>
+      <service id="406" arabicName="إنترنت ألياف ضوئية - مشترك"/>
+      <service id="407" arabicName="إيقاف"/>
+      <service id="414" arabicName="إنترنت"/>
+      <service id="415" arabicName="قطع إنترنت"/>
+
+    </serviceList>
+
+    <categoryList>
+      <!--
+SELECT SRV_CAT_ID, SRV_CAT_NAME FROM MOC_OWNER.SRV_CATS ORDER BY SRV_CAT_ID
+-->
+
+      <category id="1" arabicName="الخدمات الهاتفية" />
+      <category id="2" arabicName="خدمات متنوعة" />
+      <category id="3" arabicName="هاتف" />
+      <category id="4" arabicName="الخدمات التجارية" />
+      <category id="5" arabicName="خط ساخن" />
+      <category id="6" arabicName="خط leased line" />
+      <category id="7" arabicName="خط 800" />
+      <category id="8" arabicName="رقم ثلاثى" />
+      <category id="9" arabicName="FIBER" />
+      <category id="10" arabicName="خط  ISDN" />
+      <category id="11" arabicName="هواتف نقالة - دولي" />
+      <category id="12" arabicName="تلكس" />
+      <category id="13" arabicName="E1" />
+      <category id="14" arabicName="هواتف سيارات" />
+      <category id="15" arabicName="خدمة الربط الفردي" />
+      <category id="16" arabicName="برقية" />
+      <category id="17" arabicName="مسار" />
+      <category id="18" arabicName="مساحة" />
+      <category id="19" arabicName="هوائي" />
+      <category id="20" arabicName="فيديوتكس" />
+      <category id="21" arabicName="رسوم المناقصات" />
+      <category id="22" arabicName="الخدمات البريدية" />
+      <category id="23" arabicName="صندوق بريد" />
+      <category id="24" arabicName="الشبكة الهاتفية" />
+      <category id="25" arabicName="الخدمات البحرية - قوارب" />
+      <category id="26" arabicName="خدمة المناداة" />
+      <category id="27" arabicName="الخدمات الجوية" />
+      <category id="28" arabicName="خدمة السيتزن باند" />
+      <category id="29" arabicName="الخدمات الثابتة و المتنقلة" />
+      <category id="30" arabicName="خدمات النقل البحرى" />
+      <category id="31" arabicName="سفن صغيرة" />
+      <category id="32" arabicName="تمديدات الكيبل" />
+      <category id="33" arabicName="خدمة المؤتمرات" />
+      <category id="34" arabicName="الخدمات اللاسلكية" />
+      <category id="35" arabicName="المتاجرة بالاجهزة الاسلكية" />
+      <category id="36" arabicName="خدمات العملاء" />
+      <category id="37" arabicName="طباعة فاتورة          " />
+      <category id="38" arabicName="هواتف IMM" />
+      <category id="39" arabicName="النطاق" />
+      <category id="40" arabicName="اعلانات" />
+      <category id="41" arabicName="بث تلفزيوني" />
+      <category id="42" arabicName="خدمة الهواة" />
+      <category id="43" arabicName="خدمة الشبكة الهاتفية" />
+      <category id="44" arabicName="الخدمات البحرية - بواخر" />
+      <category id="45" arabicName="المطالبات المالية" />
+      <category id="46" arabicName="إتلافات خدمات الوزارة" />
+      <category id="47" arabicName="Leased Line دولي" />
+      <category id="48" arabicName="إنترنت IP" />
+      <category id="49" arabicName="إنترنت ألياف ضوئية - مشترك" />
+      <category id="50" arabicName="E1 دولي" />
+      <category id="51" arabicName="إنترنت ألياف ضوئية - NGN 10 MB" />
+      <category id="52" arabicName="دراجات بحرية" />
+      <category id="53" arabicName="سفن كبيرة" />
+      <category id="54" arabicName="برقيات محلية" />
+      <category id="55" arabicName="الخدمات الثابتة - ميكروويف" />
+      <category id="56" arabicName="شئون البحارة" />
+      <category id="57" arabicName="وكالات بحرية" />
+      <category id="60" arabicName="هواتف نقالة - نطاقات" />
+      <category id="61" arabicName="هواتف نقالة - ترددات" />
+      <category id="62" arabicName="إنترنت ألياف ضوئية - NGN 100 MB" />
+      <category id="63" arabicName="إنترنت ألياف ضوئية - NGN 1 GB" />
+    </categoryList>
+  </service>
+
+  <!--
+below: used typeids in OFN SR datatable
+TypeId
+46
+3
+12
+55
+49
+7
+1
+4
+5
+33
+45
+2
+48
+17
+11
+57
+8
+-->
+  <serviceRequestType>
+    <typeList>
+      <type id="1" name="" arabicName="" oracleFieldName="اسم نقطة التوزيع"/>
+      <type id="2" name="ont_id" arabicName="ont_id" oracleFieldName="رقم نقطة التوزيع"/>
+      <type id="3" name="td" arabicName="td" oracleFieldName="رقم البرغي"/>
+      <type id="4" name="" arabicName="" oracleFieldName="رقم الفيوز"/>
+      <type id="5" name="" arabicName="" oracleFieldName="CTBOX"/>
+      <type id="6" name="" arabicName="" oracleFieldName="رقم المفتاح"/>
+      <type id="7" name="" arabicName="" oracleFieldName="رقم في نفس المبنى"/>
+      <type id="8" name="" arabicName="" oracleFieldName="رقم ثان في نفس المبنى"/>
+      <type id="9" name="" arabicName="" oracleFieldName="رقم الرديف"/>
+      <type id="10" name="" arabicName="" oracleFieldName="رقم الحجز"/>
+      <type id="11" name="dn" arabicName="dn" oracleFieldName="الرقم الجديد"/>
+      <type id="12" name="pbx_dn" arabicName="pbx_dn" oracleFieldName="رقم البدالة"/>
+      <type id="13" name="" arabicName="" oracleFieldName="المسافة (كم)"/>
+      <type id="15" name="" arabicName="" oracleFieldName="المساحة (م2)"/>
+      <type id="16" name="" arabicName="" oracleFieldName="عدد الخطوط"/>
+      <type id="17" name="ont_id" arabicName="ont_id" oracleFieldName="DP_ID"/>
+      <type id="18" name="" arabicName="" oracleFieldName="رقم الربط مع 800"/>
+      <type id="20" name="" arabicName="" oracleFieldName="رقم الربط مع ISDN"/>
+      <type id="21" name="" arabicName="" oracleFieldName="رقم الربط مع النطاق"/>
+      <type id="26" name="" arabicName="" oracleFieldName="مقسم الخدمة"/>
+      <type id="28" name="" arabicName="" oracleFieldName="مكان التركيب"/>
+      <type id="29" name="" arabicName="" oracleFieldName="بداية التسلسل"/>
+      <type id="30" name="" arabicName="" oracleFieldName="نهاية التسلسل"/>
+      <type id="31" name="" arabicName="" oracleFieldName="الاسم الجديد"/>
+      <type id="32" name="" arabicName="" oracleFieldName="رقم الربط مع E1"/>
+      <type id="33" name="" arabicName="" oracleFieldName="الاسم الجديد"/>
+      <type id="34" name="" arabicName="" oracleFieldName="المشترك الآخر"/>
+      <type id="35" name="" arabicName="" oracleFieldName="الدور/الإرتفاع"/>
+      <type id="36" name="" arabicName="" oracleFieldName="عدد الوحدات"/>
+      <type id="37" name="" arabicName="" oracleFieldName="رقم الطلب"/>
+      <type id="38" name="" arabicName="" oracleFieldName="عدد الاجهزة"/>
+      <type id="39" name="" arabicName="" oracleFieldName="NO. OF DIDs"/>
+      <type id="40" name="" arabicName="" oracleFieldName="بداية التسلسل - 2"/>
+      <type id="41" name="" arabicName="" oracleFieldName="نهاية التسلسل - 2"/>
+      <type id="42" name="" arabicName="" oracleFieldName="NO. OF DIDs - 2"/>
+      <type id="43" name="" arabicName="" oracleFieldName="عدد الموجات"/>
+      <type id="44" name="" arabicName="" oracleFieldName="تفاصيل أخرى"/>
+      <type id="45" name="serial" arabicName="serial" oracleFieldName="رقم التسلسل (فيبر)"/>
+      <type id="46" name="ip" arabicName="ip" oracleFieldName="IP ADDRESS"/>
+      <type id="47" name="" arabicName="" oracleFieldName="الموقع"/>
+      <type id="48" name="dn" arabicName="dn" oracleFieldName="PHONE_NO"/>
+      <type id="49" name="customer_name" arabicName="customer_name" oracleFieldName="OWNER_NAME"/>
+      <type id="50" name="" arabicName="" oracleFieldName="(MBPS)"/>
+      <type id="51" name="" arabicName="" oracleFieldName="CIRCUIT_NO"/>
+      <type id="52" name="" arabicName="" oracleFieldName="ROUTE"/>
+      <type id="53" name="" arabicName="" oracleFieldName="رقم خدمة المسح الميداني"/>
+      <type id="54" name="" arabicName="" oracleFieldName="رقم الحجز"/>
+      <type id="55" name="" arabicName="" oracleFieldName="ملاحظات"/>
+      <type id="56" name="" arabicName="" oracleFieldName="رقم الطلب"/>
+      <type id="57" name="" arabicName="" oracleFieldName="مقدم الخدمة"/>
+      <type id="58" name="" arabicName="" oracleFieldName="متنازل إلى"/>
+      <type id="59" name="" arabicName="" oracleFieldName="الإسم القديم"/>
+      <type id="60" name="" arabicName="" oracleFieldName="عدد الخدمات"/>
+      <type id="61" name="" arabicName="" oracleFieldName="اسم التردد"/>
+      <type id="62" name="" arabicName="" oracleFieldName="عدد الترددات"/>
+
+    </typeList>
+  </serviceRequestType>
+
+</serviceRequest>

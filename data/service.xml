@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<service>
+  <typeList>
+    <!--
+        /// 0:IMSSIPUE(IMSSIPUSER): The subscriber is an IMS SIP-UE subscriber.
+        /// 1:POTS(POTSUSER): The subscriber is a SIP subscriber connected to the SIPIAD of the AGCF.
+        /// 4:G/U(GUUSER): The subscriber is a G/U subscriber.
+        /// 5:CDMA(CDMAUSER): The subscriber is a CDMA subscriber.
+        /// 6:PSTN(PSTNUSER): The subscriber is a PSTN subscriber.
+        /// Default value: none. This parameter is optional.
+
+
+        <type id="1" name="Dn"
+        <type id="2" name="Ont Name"
+        <type id="3" name="No Ont"
+        <type id="0" name="Unspecified"
+-->
+
+    <type id="0" name="?"/>
+    <type id="1" name="SIP"/>
+    <type id="2" name="PSTN"/>
+    <type id="3" name="CDMA"/>
+    <type id="4" name="G/U"/>
+    <type id="5" name="POTS"/>
+
+  </typeList>
+
+  <areaList>
+
+    <!--
+    
+To read all address infor from ServiceRequest read all before ',':
+
+select distinct substring([CustomerAddress],0, charindex(',',[CustomerAddress])) from [Ia_Ngn].[dbo].[ServiceRequests]
+
+
+العاصمة غرناطه
+العاصمة الدوحه
+الفروانية الفروانيه
+
+الأحمدي واره
+الأحمدي ابوالحصانيه
+الأحمدي العقيله
+
+الجهراء الصبيه
+الجهراء امغره
+حولى حولى
+
+الجهراء الجهراء المدينة
+
+الفروانية العارضيه
+مبارك الكبير العدان
+الأحمدي الشعيبه
+
+حولى الجابريه
+الأحمدي ضاحيه الفنيطيس
+
+العاصمة كيفان
+العاصمة اليرموك
+العاصمة الشاميه
+الجهراء النعيم
+العاصمة الشويخ الصناعيه
+الجهراء امغره الصناعية
+الأحمدي الاحمدي
+
+الأحمدي علي صباح السالم - أم الهيمان سابقا
+العاصمة القبله
+الفروانية صبحان مشرف
+الفروانية حساوى
+حولى العبدلى
+الفروانية الفردوس
+
+الفروانية صبحان
+
+الجهراء السالمى
+
+العاصمة الشويخ - منطقة ديوان الموظفين
+
+
+العاصمة الصليبيخات
+
+حولى الصديق
+مبارك الكبير القصور
+
+الجهراء العبدلي
+مبارك الكبير المسيله
+
+الجهراء تيماء
+الجهراء العيون
+الأحمدي المهبوله
+العاصمة الجيوان
+العاصمة الصالحية
+الأحمدي جنوب الاحمدى
+حولى بيان
+الجهراء الشقايا
+
+العاصمة جنوب الخالديه
+العاصمة شرق الصليبيخات
+
+الأحمدي شرق الاحمدى
+الفروانية مخيم الاسكان
+الجهراء القصر
+
+العاصمة الجيوان المدينة
+الفروانية الرحاب
+العاصمة الشويخ الجنوبى
+العاصمة الشويخ الشمالى
+العاصمة الخالديه
+العاصمة الشويخ
+الجهراء المطلاع
+الفروانية الرقعى
+حولى مشرف
+العاصمة الشويخ ب
+العاصمة المرقاب
+
+
+العاصمة النزهه
+الأحمدي الرقه
+الأحمدي جنوب العقيلة
+العاصمة شرق
+الجهراء الجهراء
+الأحمدي ميناء عبدالله
+الأحمدي الجليعة
+الفروانية جليب الشيوخ
+
+
+Area id is taken from the KuwaitArea class XML file directly
+
+- See Ia.Ngn.Cl.Model.Business.Default.CorrectCustomerAddress() for missing areas and creating them manually
+    -->
+
+    <!-- area id="" serviceRequestAddressProvinceAreaName="" symbol="" / -->
+
+    <area id="30304" serviceRequestAddressProvinceAreaName="الفروانية اشبيلية" symbol="Eshbiliya" />
+    <area id="60612" serviceRequestAddressProvinceAreaName="حولى السلام" symbol="Salam" />
+    <area id="60613" serviceRequestAddressProvinceAreaName="حولى حطين" symbol="Huteen" />
+    <area id="60614" serviceRequestAddressProvinceAreaName="حولى الشهداء" symbol="Shuhada" />
+    <area id="60616" serviceRequestAddressProvinceAreaName="حولى الزهراء" symbol="Zahra" />
+    <area id="30318" serviceRequestAddressProvinceAreaName="الفروانية صباح الناصر" symbol="Sabah Al Naser" />
+    
+    <area id="20232" serviceRequestAddressProvinceAreaName="الأحمدي فهد الأحمد" symbol="Fahad Al Ahmad" />
+    <!-- above does not appear in customer department records -->
+    
+    <area id="40436" serviceRequestAddressProvinceAreaName="الجهراء سعد العبدالله" symbol="Saad Al Abdullah" />
+    <!-- above does not appear in customer department records -->
+    
+    <area id="30324" serviceRequestAddressProvinceAreaName="الفروانية القيروان" symbol="Qayrawan" />
+    <!-- above does not appear in customer department records -->
+
+    <area id="30317" serviceRequestAddressProvinceAreaName="الفروانية عبدالله المبارك" symbol="Abdullah Al Mubarak" />
+    <!-- above does not appear in customer department records -->
+
+    <area id="50511" serviceRequestAddressProvinceAreaName="الأحمدي المنقف" symbol="Mangaf New" />
+    <area id="30325" serviceRequestAddressProvinceAreaName="العاصمة النهضة" symbol="Nahda" />
+    <area id="20215" serviceRequestAddressProvinceAreaName="" symbol="MGO" />
+    
+    <area id="50502" serviceRequestAddressProvinceAreaName="مبارك الكبير مبارك الكبير" symbol="Mubarak Al Kabeer" />
+    <area id="50505" serviceRequestAddressProvinceAreaName="مبارك الكبير العدان" symbol="Adan" />
+    <area id="50506" serviceRequestAddressProvinceAreaName="مبارك الكبير القصور" symbol="Qusoor" />
+    <area id="50507" serviceRequestAddressProvinceAreaName="مبارك الكبير القرين" symbol="Qurain" />
+
+    <area id="40408" serviceRequestAddressProvinceAreaName="الجهراء الواحة" symbol="Waha" />
+    <area id="40406" serviceRequestAddressProvinceAreaName="الجهراء النسيم" symbol="Naseem" />
+    <area id="20208" serviceRequestAddressProvinceAreaName="الأحمدي الصباحيه" symbol="Sabahiya South" />
+    <area id="20206" serviceRequestAddressProvinceAreaName="الأحمدي ابوحليفه" symbol="Abu Holaifa" />
+    <area id="20222" serviceRequestAddressProvinceAreaName="الأحمدي الفحيحيل" symbol="Fahaheel" />
+
+    <area id="60610" serviceRequestAddressProvinceAreaName="حولى سلوى" symbol="Salwa" />
+    <area id="60609" serviceRequestAddressProvinceAreaName="حولى الرميثيه" symbol="Rumaithiya" />
+    <area id="60602" serviceRequestAddressProvinceAreaName="" symbol="BDA" />
+
+    <area id="20202" serviceRequestAddressProvinceAreaName="الأحمدي الفنطاس" symbol="Fintas" />
+    <area id="40401" serviceRequestAddressProvinceAreaName="الجهراء الصليبيه" symbol="Sulaibiya" />
+    <area id="10112" serviceRequestAddressProvinceAreaName="" symbol="SKB" />
+
+    <area id="50501" serviceRequestAddressProvinceAreaName="مبارك الكبير صباح السالم" symbol="Sabah Al Salem" />
+    <!-- see above area id="" serviceRequestAddressProvinceAreaName="مبارك الكبير جنوب صباح السالم" symbol="" / -->
+
+    <area id="60607" serviceRequestAddressProvinceAreaName="حولى السالميه" symbol="Salmiya" />
+    <!-- see above area id="60619" serviceRequestAddressProvinceAreaName="" symbol="RSL" / -->
+
+  </areaList>
+
+  <state id="1" name="Not connected"/>
+  <state id="2" name="Connected"/>
+  <state id="0" name="Unspecified"/>
+
+  <!--
+  <serviceRequest>
+    <status id="0" name="Undefined"/>
+    <status id="1" name="New"/>
+    <status id="2" name="Sync"/>
+    <status id="3" name="Error"/>
+  </serviceRequest>
+  -->
+
+  <service id="0" name="Unspecified"/>
+  <service id="1" name="International Calling" arabicName="الصفر الدولي"/>
+  <service id="2" name="Caller ID" arabicName="كاشف"/>
+  <service id="3" name="Call Waiting" arabicName="إنتظار"/>
+  <service id="4" name="Call Forwarding" arabicName="تحويل"/>
+  <service id="5" name="Wakeup Call" arabicName="إيقاظ"/>
+  <service id="6" name="Conference Calling" arabicName="ثلاثي"/>
+  <service id="7" name="International Call Barring" arabicName="تحكم بالدولي"/>
+  <service id="8" name="Services Group" arabicName="مجموعة الخدمات"/>
+  <service id="9" name="Administrative Call Barring" arabicName="قطع حرارة"/>
+  <service id="10" name="Call Abbreviation" arabicName="إختصار الرقم"/>
+
+</service>

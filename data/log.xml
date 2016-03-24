@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<!--
+ids are unique
+-->
+
+<log>
+  <typeList>
+    <type id="1" name=""/>
+  </typeList>
+
+  <direction>
+    <typeList>
+      <type id="1" name="Incoming" name_ar="وارد"/>
+      <type id="2" name="Outgoing" name_ar="صادر"/>
+    </typeList>
+  </direction>
+
+  <system id="1"  name="XML Web Services">
+
+    <processList>
+      <process id="1" name="Number Disconnect">
+        <functionList>
+          <function id="1" name="Activate" parameter=""/>
+          <function id="2" name="Deactivate" parameter=""/>
+          <function id="3" name="ActivateInt" parameter=""/>
+          <function id="4" name="DeactivateInt" parameter=""/>
+          <function id="5" name="CheckStatus" parameter=""/>
+        </functionList>
+      </process>
+      
+      <process id="2" name="HSI Provisioning">
+        <functionList>
+          <function id="1" name="Activate" parameter=""/>
+          <function id="2" name="Deactivate" parameter=""/>
+          <function id="3" name="CheckStatus" parameter=""/>
+        </functionList>
+      </process>
+      
+    </processList>
+  </system>
+</log>
